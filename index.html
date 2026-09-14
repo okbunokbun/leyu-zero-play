@@ -1,795 +1,448 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   >
 
-  <title>樂羽會館｜零打報名</title>
+  <title>樂羽會館｜羽球零打報名系統</title>
 
-
-  <!-- LINE LIFF SDK -->
   <script
     charset="utf-8"
     src="https://static.line-scdn.net/liff/edge/2/sdk.js">
   </script>
 
-
   <style>
-
     * {
       box-sizing: border-box;
     }
 
-
-    html,
     body {
       margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
-    }
-
-
-    body {
       background: #f3f4f6;
       color: #222;
-
       font-family:
         -apple-system,
         BlinkMacSystemFont,
-        "Segoe UI",
         "Microsoft JhengHei",
         "Noto Sans TC",
-        Arial,
         sans-serif;
     }
 
-
-    /* =====================================
-       頂部
-       ===================================== */
-
     .header {
       background: #111;
-      color: #fff;
-
+      color: white;
       text-align: center;
-
-      padding:
-        22px
-        15px
-        20px;
+      padding: 22px 16px;
     }
-
 
     .header h1 {
       margin: 0;
-
       font-size: 28px;
       font-weight: 700;
-      letter-spacing: 1px;
     }
-
 
     .header p {
       margin: 7px 0 0;
-
-      font-size: 14px;
-
+      font-size: 15px;
       color: #ddd;
     }
 
-
-    /* =====================================
-       主內容
-       ===================================== */
-
     .container {
-      width: 100%;
-      max-width: 1100px;
-
-      margin: 0 auto;
-
-      padding: 14px;
+      width: min(1100px, calc(100% - 24px));
+      margin: 16px auto 40px;
     }
 
+    .user-box {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
 
-    /* =====================================
-       LINE 使用者
-       ===================================== */
-
-    .user-card {
       display: flex;
       align-items: center;
-
-      background: #fff;
-
-      border-radius: 14px;
-
-      padding: 15px 18px;
-
-      margin-bottom: 18px;
-
-      box-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.06);
+      gap: 14px;
     }
 
-
     .line-icon {
-      width: 42px;
-      height: 42px;
-
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-
       background: #06c755;
-
-      color: #fff;
+      color: white;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .user-title {
       font-size: 14px;
-      font-weight: 700;
-
-      margin-right: 12px;
-
-      flex-shrink: 0;
-    }
-
-
-    .user-label {
-      font-size: 13px;
-
       color: #777;
-
-      margin-bottom: 3px;
     }
-
 
     .user-name {
+      margin-top: 3px;
       font-size: 17px;
-
       font-weight: 700;
     }
-
-
-    /* =====================================
-       載入
-       ===================================== */
 
     .loading {
-      background: #fff;
-
+      background: white;
       border-radius: 14px;
-
-      padding: 30px 20px;
-
+      padding: 30px;
       text-align: center;
-
-      color: #666;
-
-      box-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
     }
-
-
-    /* =====================================
-       錯誤
-       ===================================== */
 
     .error-box {
-      display: none;
-
       background: #fff0f0;
-
-      color: #d93025;
-
+      color: #e53935;
       border-radius: 12px;
-
       padding: 16px;
-
-      line-height: 1.6;
-
-      margin-bottom: 15px;
+      margin-bottom: 16px;
+      line-height: 1.7;
     }
-
-
-    /* =====================================
-       日期區塊
-       ===================================== */
-
-    .date-section {
-      margin-bottom: 22px;
-    }
-
 
     .date-title {
-      border-left: 5px solid #111;
-
-      padding-left: 10px;
-
-      margin:
-        0
-        0
-        10px;
-
-      font-size: 20px;
-
+      font-size: 22px;
       font-weight: 700;
+      margin: 22px 0 10px;
+      padding-left: 10px;
+      border-left: 5px solid #111;
     }
-
-
-    .weekday {
-      font-size: 14px;
-
-      color: #777;
-
-      font-weight: 400;
-
-      margin-left: 4px;
-    }
-
-
-    /* =====================================
-       梯次卡片
-       ===================================== */
 
     .session-card {
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      gap: 15px;
-
-      background: #fff;
-
+      background: white;
       border-radius: 14px;
-
       padding: 18px;
-
       margin-bottom: 10px;
 
-      box-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.05);
-    }
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
 
+      box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    }
 
     .session-info {
       min-width: 0;
     }
 
-
     .session-name {
       font-size: 18px;
-
       font-weight: 700;
-
       margin-bottom: 7px;
     }
-
 
     .session-time {
-      font-size: 15px;
-
+      font-size: 16px;
       color: #555;
-
       margin-bottom: 7px;
     }
 
-
-    .session-capacity {
-      font-size: 14px;
-
-      color: #00a65a;
+    .session-count {
+      font-size: 15px;
+      color: #009b5a;
     }
-
 
     .session-full {
-      color: #d93025;
+      color: #e53935;
     }
 
-
-    /* =====================================
-       報名按鈕
-       ===================================== */
-
-    .book-button {
-      border: 0;
-
+    .signup-btn {
+      border: none;
       background: #111;
+      color: white;
 
-      color: #fff;
+      min-width: 105px;
+      padding: 12px 16px;
 
       border-radius: 10px;
-
-      padding:
-        12px
-        18px;
-
-      font-size: 15px;
-
+      font-size: 16px;
       font-weight: 600;
 
       cursor: pointer;
-
-      white-space: nowrap;
-
-      flex-shrink: 0;
     }
 
-
-    .book-button:active {
-      transform: scale(0.97);
-    }
-
-
-    .book-button:disabled {
+    .signup-btn:disabled {
       background: #aaa;
-
       cursor: not-allowed;
-
-      transform: none;
     }
 
+    /* Modal */
 
-    /* =====================================
-       Modal
-       ===================================== */
-
-    .modal {
+    .modal-bg {
       display: none;
 
       position: fixed;
+      inset: 0;
 
-      z-index: 99999;
+      background: rgba(0,0,0,.58);
 
-      left: 0;
-      top: 0;
-
-      width: 100%;
-      height: 100%;
-
-      background:
-        rgba(0, 0, 0, 0.55);
-
-      padding: 15px;
+      z-index: 9999;
 
       align-items: center;
-
       justify-content: center;
+
+      padding: 18px;
     }
 
-
-    .modal.show {
-      display: flex;
-    }
-
-
-    .modal-box {
-      width: 100%;
-
-      max-width: 460px;
-
-      max-height: 90vh;
-
-      overflow-y: auto;
-
-      background: #fff;
-
+    .modal {
+      width: min(480px, 100%);
+      background: white;
       border-radius: 18px;
-
       padding: 22px;
+
+      box-shadow: 0 10px 40px rgba(0,0,0,.25);
     }
 
+    .modal h2 {
+      margin: 0 0 16px;
+      font-size: 23px;
+    }
 
-    .modal-title {
-      font-size: 22px;
+    .modal-info {
+      line-height: 1.75;
+      margin-bottom: 15px;
+      color: #444;
+    }
 
-      font-weight: 700;
-
+    .form-group {
       margin-bottom: 14px;
     }
 
-
-    .booking-summary {
-      font-size: 14px;
-
-      color: #555;
-
-      line-height: 1.9;
-
-      margin-bottom: 12px;
-    }
-
-
-    .form-label {
+    .form-group label {
       display: block;
-
-      font-size: 15px;
-
       font-weight: 700;
-
-      margin:
-        12px
-        0
-        7px;
+      margin-bottom: 7px;
     }
 
-
-    .form-input {
+    .form-group input {
       width: 100%;
-
       height: 46px;
 
-      border:
-        1px solid
-        #ccc;
+      border: 1px solid #ccc;
+      border-radius: 9px;
 
-      border-radius: 10px;
-
-      padding:
-        0
-        12px;
+      padding: 0 12px;
 
       font-size: 16px;
-
       outline: none;
-
-      background: #fff;
     }
 
-
-    .form-input:focus {
+    .form-group input:focus {
       border-color: #111;
     }
 
-
-    /* =====================================
-       結果訊息
-       ===================================== */
-
-    .result-box {
-      display: none;
-
-      border-radius: 10px;
-
-      padding: 14px;
-
-      margin-top: 14px;
-
-      font-size: 15px;
-
-      line-height: 1.8;
-    }
-
-
-    .result-success {
-      display: block;
-
-      background: #e8f8ee;
-
-      color: #008a45;
-    }
-
-
-    .result-error {
-      display: block;
-
-      background: #fff0f0;
-
-      color: #d93025;
-    }
-
-
-    /* =====================================
-       Modal 按鈕
-       ===================================== */
-
     .modal-buttons {
       display: flex;
-
       gap: 10px;
-
       margin-top: 18px;
     }
 
-
-    .modal-button {
+    .cancel-btn,
+    .confirm-btn {
       flex: 1;
 
-      border: 0;
-
+      height: 48px;
+      border: none;
       border-radius: 10px;
 
-      padding: 13px;
-
       font-size: 16px;
-
-      cursor: pointer;
-    }
-
-
-    .cancel-button {
-      background: #eee;
-
-      color: #333;
-    }
-
-
-    .confirm-button {
-      background: #06c755;
-
-      color: #fff;
-
       font-weight: 700;
     }
 
+    .cancel-btn {
+      background: #eee;
+      color: #333;
+    }
 
-    .confirm-button:disabled {
+    .confirm-btn {
+      background: #06c755;
+      color: white;
+    }
+
+    .confirm-btn:disabled {
       background: #aaa;
-
-      cursor: not-allowed;
     }
 
+    .success-box {
+      background: #e9f9ef;
+      color: #008a4b;
 
-    /* =====================================
-       隱藏 iframe
-       ===================================== */
+      border-radius: 12px;
+      padding: 15px;
 
-    #postFrame {
+      line-height: 1.8;
+      margin-top: 12px;
+    }
+
+    .fail-box {
+      background: #fff0f0;
+      color: #d93025;
+
+      border-radius: 12px;
+      padding: 15px;
+
+      line-height: 1.8;
+      margin-top: 12px;
+    }
+
+    .hidden-frame {
       display: none;
-
-      width: 0;
-      height: 0;
-
-      border: 0;
     }
-
-
-    /* =====================================
-       手機版
-       ===================================== */
 
     @media (max-width: 600px) {
 
       .header {
-        padding:
-          18px
-          12px
-          17px;
+        padding: 18px 12px;
       }
-
 
       .header h1 {
         font-size: 24px;
       }
 
-
       .container {
-        padding: 10px;
+        width: calc(100% - 16px);
       }
-
 
       .session-card {
         padding: 15px;
       }
 
-
       .session-name {
         font-size: 17px;
       }
 
-
       .session-time {
+        font-size: 15px;
+      }
+
+      .session-count {
         font-size: 14px;
       }
 
-
-      .session-capacity {
-        font-size: 13px;
+      .signup-btn {
+        min-width: 90px;
+        padding: 10px 12px;
       }
-
-
-      .book-button {
-        padding:
-          11px
-          14px;
-
-        font-size: 14px;
-      }
-
-
-      .modal {
-        padding: 10px;
-      }
-
-
-      .modal-box {
-        padding: 18px;
-
-        border-radius: 16px;
-      }
-
     }
-
   </style>
-
 </head>
-
 
 <body>
 
-
-  <!-- =====================================
-       Header
-       ===================================== -->
-
-  <header class="header">
-
+  <div class="header">
     <h1>樂羽會館</h1>
-
     <p>羽球零打報名系統</p>
+  </div>
 
-  </header>
+  <div class="container">
 
-
-  <!-- =====================================
-       主內容
-       ===================================== -->
-
-  <main class="container">
-
-
-    <!-- LINE 使用者 -->
-
-    <div
-      id="userCard"
-      class="user-card"
-      style="display:none;"
-    >
-
-      <div class="line-icon">
-        LINE
-      </div>
+    <div class="user-box">
+      <div class="line-icon">LINE</div>
 
       <div>
-
-        <div class="user-label">
-          LINE 使用者
-        </div>
-
-        <div
-          id="userName"
-          class="user-name"
-        >
-          載入中...
-        </div>
-
+        <div class="user-title">LINE 使用者</div>
+        <div class="user-name" id="userName">登入中...</div>
       </div>
-
     </div>
 
+    <div id="errorArea"></div>
 
-    <!-- 載入中 -->
-
-    <div
-      id="loading"
-      class="loading"
-    >
+    <div id="loadingArea" class="loading">
       正在載入零打場次...
     </div>
 
+    <div id="sessionsArea"></div>
 
-    <!-- 錯誤 -->
-
-    <div
-      id="errorBox"
-      class="error-box"
-    ></div>
+  </div>
 
 
-    <!-- 場次 -->
+  <!-- 報名視窗 -->
 
-    <div
-      id="sessionsContainer"
-    ></div>
+  <div id="modalBg" class="modal-bg">
 
+    <div class="modal">
 
-  </main>
+      <h2>零打報名</h2>
 
+      <div class="modal-info">
 
-  <!-- =====================================
-       報名 Modal
-       ===================================== -->
+        <div>
+          日期：
+          <strong id="modalDate"></strong>
+        </div>
 
-  <div
-    id="bookingModal"
-    class="modal"
-  >
+        <div>
+          梯次：
+          <strong id="modalSession"></strong>
+        </div>
 
-    <div class="modal-box">
+        <div>
+          時間：
+          <strong id="modalTime"></strong>
+        </div>
 
+        <div>
+          剩餘名額：
+          <strong id="modalRemaining"></strong>
+        </div>
 
-      <div class="modal-title">
-        零打報名
       </div>
 
 
-      <div
-        id="bookingSummary"
-        class="booking-summary"
-      ></div>
+      <div class="form-group">
+        <label for="nameInput">姓名</label>
+
+        <input
+          id="nameInput"
+          type="text"
+          maxlength="20"
+          autocomplete="name"
+          placeholder="請輸入姓名"
+        >
+      </div>
 
 
-      <!-- 姓名 -->
+      <div class="form-group">
+        <label for="phoneInput">手機號碼</label>
 
-      <label class="form-label">
-        姓名
-      </label>
-
-
-      <input
-        id="nameInput"
-        class="form-input"
-        type="text"
-        placeholder="請輸入姓名"
-        autocomplete="name"
-      >
+        <input
+          id="phoneInput"
+          type="tel"
+          maxlength="10"
+          inputmode="numeric"
+          autocomplete="tel"
+          placeholder="例如：0912345678"
+        >
+      </div>
 
 
-      <!-- 手機 -->
+      <div id="resultArea"></div>
 
-      <label class="form-label">
-        手機號碼
-      </label>
-
-
-      <input
-        id="phoneInput"
-        class="form-input"
-        type="tel"
-        inputmode="numeric"
-        maxlength="10"
-        placeholder="例如：0912345678"
-        autocomplete="tel"
-      >
-
-
-      <!-- 結果 -->
-
-      <div
-        id="resultBox"
-        class="result-box"
-      ></div>
-
-
-      <!-- 按鈕 -->
 
       <div class="modal-buttons">
 
         <button
-          id="cancelButton"
-          class="modal-button cancel-button"
-          type="button"
+          id="cancelBtn"
+          class="cancel-btn"
           onclick="closeModal()"
         >
           取消
         </button>
 
-
         <button
-          id="confirmButton"
-          class="modal-button confirm-button"
-          type="button"
+          id="confirmBtn"
+          class="confirm-btn"
           onclick="submitBooking()"
         >
           確認報名
@@ -797,88 +450,276 @@
 
       </div>
 
-
     </div>
 
   </div>
 
 
-  <!-- =====================================
-       隱藏 POST iframe
-       ===================================== -->
+  <!-- 隱藏 iframe：用於跨網域 POST -->
 
   <iframe
-    id="postFrame"
-    name="postFrame"
-  ></iframe>
+    name="bookingFrame"
+    id="bookingFrame"
+    class="hidden-frame">
+  </iframe>
 
 
 <script>
 
+  /* =====================================================
+     基本設定
+  ===================================================== */
 
-/* =====================================================
-   系統設定
-   ===================================================== */
+  const LIFF_ID = "2011603755-U8bYBa4n";
 
-
-const LIFF_ID =
-  "2011603755-U8bYBa4n";
-
-
-const GAS_API =
-  "https://script.google.com/macros/s/AKfycbyFxTErNwhLKgIhDuuZwILEyC39oXwAEdzuPhl1uLvWsACZ5DzAlZIU5pCEjxxf8rAnyg/exec";
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbyFxTErNwhLKgIhDuuZwILEyC39oXwAEdzuPhl1uLvWsACZ5DzAlZIU5pCEjxxf8rAnyg/exec";
 
 
-/* =====================================================
-   全域變數
-   ===================================================== */
+  /* =====================================================
+     系統變數
+  ===================================================== */
+
+  let currentUser = null;
+
+  let currentIDToken = "";
+
+  let selectedSession = null;
+
+  let bookingRequestId = "";
+
+  let bookingTimer = null;
+
+  let jsonpCounter = 0;
 
 
-let lineProfile = null;
+  /* =====================================================
+     頁面初始化
+  ===================================================== */
 
-let idToken = null;
-
-let selectedSession = null;
-
-let bookingBusy = false;
-
-let currentRequestId = "";
-
-let statusTimer = null;
+  window.addEventListener("load", init);
 
 
-/* =====================================================
-   頁面載入
-   ===================================================== */
+  async function init() {
+
+    try {
+
+      /*
+       * 初始化 LIFF
+       */
+
+      await liff.init({
+        liffId: LIFF_ID,
+        withLoginOnExternalBrowser: true
+      });
 
 
-window.addEventListener(
-  "load",
-  initLIFF
-);
+      /*
+       * 如果尚未登入 LINE
+       */
+
+      if (!liff.isLoggedIn()) {
+
+        liff.login();
+
+        return;
+      }
 
 
-/* =====================================================
-   初始化 LIFF
-   ===================================================== */
+      /*
+       * 取得 LINE 使用者資料
+       */
+
+      currentUser = await liff.getProfile();
+
+      document.getElementById("userName").textContent =
+        currentUser.displayName || "LINE 使用者";
 
 
-async function initLIFF() {
+      /*
+       * 取得 ID Token
+       */
 
-  try {
+      currentIDToken = liff.getIDToken();
 
-    await liff.init({
-      liffId: LIFF_ID,
-      withLoginOnExternalBrowser: true
-    });
+      if (!currentIDToken) {
+
+        throw new Error("無法取得 LINE ID Token");
+
+      }
+
+
+      /*
+       * 載入場次
+       */
+
+      loadSessions();
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+      showError(
+        "LINE 初始化失敗：" +
+        (error.message || error)
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     JSONP 載入場次
+  ===================================================== */
+
+  function loadSessions() {
+
+    document.getElementById("loadingArea").style.display =
+      "block";
+
+    document.getElementById("sessionsArea").innerHTML = "";
+
+    document.getElementById("errorArea").innerHTML = "";
+
+
+    const callbackName =
+      "sessionsCallback_" +
+      Date.now() +
+      "_" +
+      (++jsonpCounter);
+
+
+    window[callbackName] = function(data) {
+
+      try {
+
+        delete window[callbackName];
+
+        const script =
+          document.getElementById(callbackName);
+
+        if (script) {
+
+          script.remove();
+
+        }
+
+
+        document.getElementById("loadingArea").style.display =
+          "none";
+
+
+        if (!data || data.success !== true) {
+
+          showError(
+            data && data.message
+              ? data.message
+              : "無法取得零打場次"
+          );
+
+          return;
+        }
+
+
+        renderSessions(data.sessions || []);
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+        showError(
+          "場次資料處理失敗：" +
+          error.message
+        );
+
+      }
+
+    };
+
+
+    const script = document.createElement("script");
+
+    script.id = callbackName;
+
+    script.src =
+      API_URL +
+      "?action=sessions" +
+      "&callback=" +
+      encodeURIComponent(callbackName) +
+      "&_=" +
+      Date.now();
+
+
+    script.onerror = function() {
+
+      delete window[callbackName];
+
+      script.remove();
+
+      document.getElementById("loadingArea").style.display =
+        "none";
+
+
+      showError(
+        "無法連線到報名系統，請重新整理頁面。"
+      );
+
+    };
+
+
+    document.body.appendChild(script);
 
 
     /*
-     * 如果沒有登入 LINE
+     * 15 秒逾時
      */
-    if (!liff.isLoggedIn()) {
 
-      liff.login();
+    setTimeout(function() {
+
+      if (window[callbackName]) {
+
+        delete window[callbackName];
+
+        if (script.parentNode) {
+
+          script.remove();
+
+        }
+
+        document.getElementById("loadingArea").style.display =
+          "none";
+
+        showError(
+          "報名系統連線逾時，請重新整理頁面。"
+        );
+
+      }
+
+    }, 15000);
+
+  }
+
+
+  /* =====================================================
+     顯示場次
+  ===================================================== */
+
+  function renderSessions(sessions) {
+
+    const area =
+      document.getElementById("sessionsArea");
+
+    area.innerHTML = "";
+
+
+    if (!sessions.length) {
+
+      showError("目前沒有開放的零打場次。");
 
       return;
 
@@ -886,1234 +727,553 @@ async function initLIFF() {
 
 
     /*
-     * 取得 LINE 個人資料
+     * 依日期分組
      */
-    lineProfile =
-      await liff.getProfile();
 
+    const grouped = {};
 
-    /*
-     * 取得 LINE ID Token
-     */
-    idToken =
-      liff.getIDToken();
+    sessions.forEach(function(session) {
 
+      if (!grouped[session.date]) {
 
-    if (!idToken) {
-
-      throw new Error(
-        "無法取得 LINE 身分驗證資訊"
-      );
-
-    }
-
-
-    /*
-     * 顯示使用者名稱
-     */
-    document
-      .getElementById("userName")
-      .textContent =
-        lineProfile.displayName ||
-        "LINE 使用者";
-
-
-    document
-      .getElementById("userCard")
-      .style.display =
-        "flex";
-
-
-    /*
-     * 讀取場次
-     */
-    載入場次();
-
-
-  } catch (error) {
-
-    console.error(
-      "LIFF 初始化錯誤：",
-      error
-    );
-
-
-    顯示錯誤(
-      "LINE 初始化失敗：" +
-      取得錯誤訊息(error)
-    );
-
-  }
-
-}
-
-
-/* =====================================================
-   取得錯誤訊息
-   ===================================================== */
-
-
-function 取得錯誤訊息(error) {
-
-  if (!error) {
-
-    return "未知錯誤";
-
-  }
-
-
-  if (error.message) {
-
-    return error.message;
-
-  }
-
-
-  return String(error);
-
-}
-
-
-/* =====================================================
-   JSONP 讀取場次
-   ===================================================== */
-
-
-function 載入場次() {
-
-  /*
-   * 清除舊錯誤
-   */
-  const errorBox =
-    document.getElementById(
-      "errorBox"
-    );
-
-
-  errorBox.style.display =
-    "none";
-
-
-  /*
-   * 顯示載入
-   */
-  document
-    .getElementById("loading")
-    .style.display =
-      "block";
-
-
-  /*
-   * 建立唯一 callback
-   */
-  const callbackName =
-    "leyuSessions_" +
-    Date.now() +
-    "_" +
-    Math.random()
-      .toString(36)
-      .substring(2, 8);
-
-
-  const script =
-    document.createElement(
-      "script"
-    );
-
-
-  let finished = false;
-
-
-  window[callbackName] =
-    function(data) {
-
-      if (finished) {
-
-        return;
+        grouped[session.date] = [];
 
       }
 
+      grouped[session.date].push(session);
 
-      finished = true;
+    });
 
 
-      try {
+    Object.keys(grouped).sort().forEach(function(date) {
 
-        if (
-          !data ||
-          data.success !== true
-        ) {
+      const dateTitle =
+        document.createElement("div");
 
-          throw new Error(
-            data &&
-            data.message
-              ? data.message
-              : "場次資料讀取失敗"
-          );
+      dateTitle.className =
+        "date-title";
+
+      dateTitle.textContent =
+        formatDateTitle(date);
+
+      area.appendChild(dateTitle);
+
+
+      grouped[date].forEach(function(session) {
+
+        const card =
+          document.createElement("div");
+
+        card.className =
+          "session-card";
+
+
+        const info =
+          document.createElement("div");
+
+        info.className =
+          "session-info";
+
+
+        const sessionName =
+          document.createElement("div");
+
+        sessionName.className =
+          "session-name";
+
+        sessionName.textContent =
+          "第 " + session.sessionId + " 梯";
+
+
+        const time =
+          document.createElement("div");
+
+        time.className =
+          "session-time";
+
+        time.textContent =
+          session.startTime +
+          " – " +
+          session.endTime;
+
+
+        const count =
+          document.createElement("div");
+
+        count.className =
+          "session-count";
+
+
+        if (Number(session.remaining) <= 0) {
+
+          count.classList.add("session-full");
+
+          count.textContent =
+            "已額滿";
+
+        }
+
+        else {
+
+          count.textContent =
+            "已報名 " +
+            session.booked +
+            " 人｜剩餘 " +
+            session.remaining +
+            " 人";
 
         }
 
 
-        顯示場次(
-          data.sessions || []
-        );
+        info.appendChild(sessionName);
+
+        info.appendChild(time);
+
+        info.appendChild(count);
 
 
-      } catch (error) {
+        const button =
+          document.createElement("button");
 
-        console.error(error);
+        button.className =
+          "signup-btn";
 
-        顯示錯誤(
-          取得錯誤訊息(error)
-        );
-
-      } finally {
-
-        清理JSONP(
-          script,
-          callbackName
-        );
-
-      }
-
-    };
+        button.textContent =
+          Number(session.remaining) <= 0
+            ? "已額滿"
+            : "立即報名";
 
 
-  script.src =
-    GAS_API +
-    "?action=sessions" +
-    "&callback=" +
-    encodeURIComponent(
-      callbackName
-    ) +
-    "&_=" +
-    Date.now();
+        button.disabled =
+          Number(session.remaining) <= 0;
 
 
-  script.onerror =
-    function() {
+        button.onclick = function() {
 
-      if (finished) {
+          openModal(session);
 
-        return;
-
-      }
+        };
 
 
-      finished = true;
+        card.appendChild(info);
+
+        card.appendChild(button);
+
+        area.appendChild(card);
+
+      });
+
+    });
+
+  }
 
 
-      顯示錯誤(
-        "無法連線到報名系統，請重新整理頁面。"
-      );
+  /* =====================================================
+     日期顯示
+  ===================================================== */
+
+  function formatDateTitle(dateString) {
+
+    const parts =
+      dateString.split("-");
+
+    if (parts.length !== 3) {
+
+      return dateString;
+
+    }
+
+    const year =
+      Number(parts[0]);
+
+    const month =
+      Number(parts[1]);
+
+    const day =
+      Number(parts[2]);
 
 
-      清理JSONP(
-        script,
-        callbackName
-      );
-
-    };
+    const date =
+      new Date(year, month - 1, day);
 
 
-  document
-    .body
-    .appendChild(script);
+    const weekdays = [
+      "星期日",
+      "星期一",
+      "星期二",
+      "星期三",
+      "星期四",
+      "星期五",
+      "星期六"
+    ];
 
-}
 
-
-/* =====================================================
-   清理 JSONP
-   ===================================================== */
-
-
-function 清理JSONP(
-  script,
-  callbackName
-) {
-
-  if (
-    script &&
-    script.parentNode
-  ) {
-
-    script.parentNode.removeChild(
-      script
+    return (
+      String(month).padStart(2, "0") +
+      "/" +
+      String(day).padStart(2, "0") +
+      " " +
+      weekdays[date.getDay()]
     );
 
   }
 
 
-  try {
+  /* =====================================================
+     開啟報名視窗
+  ===================================================== */
 
-    delete window[callbackName];
+  function openModal(session) {
 
-  } catch (error) {
+    selectedSession =
+      session;
+
+
+    document.getElementById("modalDate").textContent =
+      shortDate(session.date);
+
+
+    document.getElementById("modalSession").textContent =
+      "第 " + session.sessionId + " 梯";
+
+
+    document.getElementById("modalTime").textContent =
+      session.startTime +
+      " – " +
+      session.endTime;
+
+
+    document.getElementById("modalRemaining").textContent =
+      session.remaining +
+      " 人";
+
+
+    document.getElementById("nameInput").value = "";
+
+    document.getElementById("phoneInput").value = "";
+
+    document.getElementById("resultArea").innerHTML = "";
+
+
+    document.getElementById("confirmBtn").disabled =
+      false;
+
+    document.getElementById("confirmBtn").textContent =
+      "確認報名";
+
+
+    document.getElementById("cancelBtn").disabled =
+      false;
+
+
+    document.getElementById("modalBg").style.display =
+      "flex";
+
+
+    setTimeout(function() {
+
+      document.getElementById("nameInput").focus();
+
+    }, 100);
 
   }
 
-}
+
+  /* =====================================================
+     關閉視窗
+  ===================================================== */
+
+  function closeModal() {
+
+    if (bookingTimer) {
+
+      clearInterval(bookingTimer);
+
+      bookingTimer = null;
+
+    }
 
 
-/* =====================================================
-   顯示場次
-   ===================================================== */
-
-
-function 顯示場次(
-  sessions
-) {
-
-  document
-    .getElementById("loading")
-    .style.display =
+    document.getElementById("modalBg").style.display =
       "none";
 
 
-  const container =
-    document.getElementById(
-      "sessionsContainer"
-    );
-
-
-  container.innerHTML =
-    "";
-
-
-  /*
-   * 只接受正常的 1～5 梯
-   *
-   * 可以避免 Google Sheet 裡
-   * 舊資料或異常資料被顯示。
-   */
-  const validSessions =
-    (sessions || []).filter(
-      function(session) {
-
-        const id =
-          String(
-            session.sessionId
-          );
-
-
-        return [
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ].includes(id);
-
-      }
-    );
-
-
-  if (
-    validSessions.length === 0
-  ) {
-
-    container.innerHTML =
-      '<div class="loading">' +
-      '目前沒有可報名場次' +
-      '</div>';
-
-    return;
+    selectedSession = null;
 
   }
 
 
-  /*
-   * 日期分組
-   */
-  const grouped = {};
+  /* =====================================================
+     執行報名
+  ===================================================== */
 
+  function submitBooking() {
 
-  validSessions.forEach(
-    function(session) {
+    if (!selectedSession) {
 
-      if (!session.date) {
-
-        return;
-
-      }
-
-
-      if (
-        !grouped[session.date]
-      ) {
-
-        grouped[session.date] =
-          [];
-
-      }
-
-
-      grouped[session.date]
-        .push(session);
+      return;
 
     }
-  );
 
 
-  /*
-   * 日期排序
-   */
-  Object.keys(grouped)
-    .sort()
-    .forEach(
-      function(date) {
+    const name =
+      document.getElementById("nameInput")
+        .value
+        .trim();
 
-        const section =
-          document.createElement(
-            "section"
-          );
 
+    const phone =
+      document.getElementById("phoneInput")
+        .value
+        .trim();
 
-        section.className =
-          "date-section";
 
+    if (!name) {
 
-        /*
-         * 日期標題
-         */
-        const title =
-          document.createElement(
-            "h2"
-          );
+      alert("請輸入姓名");
 
+      return;
 
-        title.className =
-          "date-title";
+    }
 
 
-        title.innerHTML =
-          escapeHTML(
-            格式化日期(date)
-          ) +
-          ' <span class="weekday">' +
-          escapeHTML(
-            星期文字(date)
-          ) +
-          '</span>';
+    if (!/^09\d{8}$/.test(phone)) {
 
+      alert("請輸入正確的手機號碼，例如 0912345678");
 
-        section.appendChild(
-          title
-        );
+      return;
 
+    }
 
-        /*
-         * 梯次排序
-         */
-        grouped[date]
-          .sort(
-            function(a, b) {
 
-              return (
-                Number(
-                  a.sessionId
-                ) -
-                Number(
-                  b.sessionId
-                )
-              );
+    if (!currentIDToken) {
 
-            }
-          )
-          .forEach(
-            function(session) {
+      alert("LINE 身分驗證失效，請重新整理頁面。");
 
-              section.appendChild(
-                建立梯次卡片(
-                  session
-                )
-              );
+      return;
 
-            }
-          );
-
-
-        container.appendChild(
-          section
-        );
-
-      }
-    );
-
-}
-
-
-/* =====================================================
-   建立梯次卡片
-   ===================================================== */
-
-
-function 建立梯次卡片(
-  session
-) {
-
-  const card =
-    document.createElement(
-      "div"
-    );
-
-
-  card.className =
-    "session-card";
-
-
-  /*
-   * 左側資料
-   */
-  const info =
-    document.createElement(
-      "div"
-    );
-
-
-  info.className =
-    "session-info";
-
-
-  /*
-   * 梯次
-   */
-  const sessionName =
-    document.createElement(
-      "div"
-    );
-
-
-  sessionName.className =
-    "session-name";
-
-
-  sessionName.textContent =
-    "第" +
-    session.sessionId +
-    "梯";
-
-
-  /*
-   * 時間
-   */
-  const sessionTime =
-    document.createElement(
-      "div"
-    );
-
-
-  sessionTime.className =
-    "session-time";
-
-
-  sessionTime.textContent =
-    session.startTime +
-    " – " +
-    session.endTime;
-
-
-  /*
-   * 名額
-   */
-  const capacity =
-    document.createElement(
-      "div"
-    );
-
-
-  capacity.className =
-    "session-capacity";
-
-
-  const remaining =
-    Number(
-      session.remaining
-    ) || 0;
-
-
-  const booked =
-    Number(
-      session.booked
-    ) || 0;
-
-
-  capacity.textContent =
-    "已報名 " +
-    booked +
-    " 人｜剩餘 " +
-    remaining +
-    " 人";
-
-
-  if (
-    remaining <= 0
-  ) {
-
-    capacity.classList.add(
-      "session-full"
-    );
-
-  }
-
-
-  info.appendChild(
-    sessionName
-  );
-
-
-  info.appendChild(
-    sessionTime
-  );
-
-
-  info.appendChild(
-    capacity
-  );
-
-
-  /*
-   * 右側按鈕
-   */
-  const button =
-    document.createElement(
-      "button"
-    );
-
-
-  button.className =
-    "book-button";
-
-
-  button.type =
-    "button";
-
-
-  if (remaining > 0) {
-
-    button.textContent =
-      "立即報名";
-
-    button.disabled =
-      false;
-
-    button.onclick =
-      function() {
-
-        openModal(
-          session
-        );
-
-      };
-
-  } else {
-
-    button.textContent =
-      "已額滿";
-
-    button.disabled =
-      true;
-
-  }
-
-
-  card.appendChild(
-    info
-  );
-
-
-  card.appendChild(
-    button
-  );
-
-
-  return card;
-
-}
-
-
-/* =====================================================
-   開啟報名視窗
-   ===================================================== */
-
-
-function openModal(
-  session
-) {
-
-  if (!session) {
-
-    return;
-
-  }
-
-
-  if (
-    Number(
-      session.remaining
-    ) <= 0
-  ) {
-
-    return;
-
-  }
-
-
-  selectedSession =
-    session;
-
-
-  bookingBusy =
-    false;
-
-
-  /*
-   * 清除舊結果
-   */
-  const resultBox =
-    document.getElementById(
-      "resultBox"
-    );
-
-
-  resultBox.style.display =
-    "none";
-
-
-  resultBox.className =
-    "result-box";
-
-
-  resultBox.textContent =
-    "";
-
-
-  /*
-   * 顯示場次資料
-   */
-  document
-    .getElementById(
-      "bookingSummary"
-    )
-    .innerHTML =
-
-      "日期：<strong>" +
-      escapeHTML(
-        格式化日期(
-          session.date
-        )
-      ) +
-      "</strong><br>" +
-
-      "梯次：<strong>第" +
-      escapeHTML(
-        String(
-          session.sessionId
-        )
-      ) +
-      "梯</strong><br>" +
-
-      "時間：<strong>" +
-      escapeHTML(
-        session.startTime
-      ) +
-      " – " +
-      escapeHTML(
-        session.endTime
-      ) +
-      "</strong><br>" +
-
-      "剩餘名額：<strong>" +
-      escapeHTML(
-        String(
-          session.remaining
-        )
-      ) +
-      " 人</strong>";
-
-
-  /*
-   * 清空輸入
-   */
-  document
-    .getElementById(
-      "nameInput"
-    )
-    .value =
-      "";
-
-
-  document
-    .getElementById(
-      "phoneInput"
-    )
-    .value =
-      "";
-
-
-  /*
-   * 恢復確認按鈕
-   */
-  const confirmButton =
-    document.getElementById(
-      "confirmButton"
-    );
-
-
-  confirmButton.disabled =
-    false;
-
-
-  confirmButton.textContent =
-    "確認報名";
-
-
-  /*
-   * 顯示視窗
-   */
-  document
-    .getElementById(
-      "bookingModal"
-    )
-    .classList.add(
-      "show"
-    );
-
-
-  /*
-   * 自動 focus 姓名
-   */
-  setTimeout(
-    function() {
-
-      document
-        .getElementById(
-          "nameInput"
-        )
-        .focus();
-
-    },
-    100
-  );
-
-}
-
-
-/* =====================================================
-   關閉 Modal
-   ===================================================== */
-
-
-function closeModal() {
-
-  /*
-   * 報名處理中不可關閉
-   */
-  if (bookingBusy) {
-
-    return;
-
-  }
-
-
-  document
-    .getElementById(
-      "bookingModal"
-    )
-    .classList.remove(
-      "show"
-    );
-
-
-  selectedSession =
-    null;
-
-
-  currentRequestId =
-    "";
-
-}
-
-
-/* =====================================================
-   送出報名
-   ===================================================== */
-
-
-function submitBooking() {
-
-  /*
-   * 防止重複點擊
-   */
-  if (bookingBusy) {
-
-    return;
-
-  }
-
-
-  if (!selectedSession) {
-
-    顯示結果(
-      false,
-      "請重新選擇報名梯次"
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * 取得資料
-   */
-  const name =
-    document
-      .getElementById(
-        "nameInput"
-      )
-      .value
-      .trim();
-
-
-  const phone =
-    document
-      .getElementById(
-        "phoneInput"
-      )
-      .value
-      .trim();
-
-
-  /*
-   * 姓名
-   */
-  if (!name) {
-
-    顯示結果(
-      false,
-      "請輸入姓名"
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * 手機
-   */
-  if (
-    !/^09\d{8}$/.test(phone)
-  ) {
-
-    顯示結果(
-      false,
-      "請輸入正確的10碼手機號碼，例如：0912345678"
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * LINE Token
-   */
-  if (!idToken) {
-
-    顯示結果(
-      false,
-      "LINE 身分驗證已失效，請重新開啟報名頁面。"
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * 名額再次確認
-   */
-  if (
-    Number(
-      selectedSession.remaining
-    ) <= 0
-  ) {
-
-    顯示結果(
-      false,
-      "很抱歉，這個梯次已額滿。請重新整理頁面。"
-    );
-
-    return;
-
-  }
-
-
-  /*
-   * 開始處理
-   */
-  bookingBusy =
-    true;
-
-
-  const confirmButton =
-    document.getElementById(
-      "confirmButton"
-    );
-
-
-  confirmButton.disabled =
-    true;
-
-
-  confirmButton.textContent =
-    "報名處理中...";
-
-
-  /*
-   * 建立唯一 Request ID
-   */
-  currentRequestId =
-    "R" +
-    Date.now() +
-    "_" +
-    Math.random()
-      .toString(36)
-      .substring(2, 10);
-
-
-  /*
-   * 建立 POST Form
-   */
-  const form =
-    document.createElement(
-      "form"
-    );
-
-
-  form.method =
-    "POST";
-
-
-  form.action =
-    GAS_API;
-
-
-  form.target =
-    "postFrame";
-
-
-  form.style.display =
-    "none";
-
-
-  /*
-   * Request ID
-   */
-  加入表單欄位(
-    form,
-    "request_id",
-    currentRequestId
-  );
-
-
-  /*
-   * 日期
-   */
-  加入表單欄位(
-    form,
-    "date",
-    selectedSession.date
-  );
-
-
-  /*
-   * 梯次
-   */
-  加入表單欄位(
-    form,
-    "session_id",
-    selectedSession.sessionId
-  );
-
-
-  /*
-   * 姓名
-   */
-  加入表單欄位(
-    form,
-    "name",
-    name
-  );
-
-
-  /*
-   * 手機
-   */
-  加入表單欄位(
-    form,
-    "phone",
-    phone
-  );
-
-
-  /*
-   * LINE ID Token
-   *
-   * 不放在 URL。
-   */
-  加入表單欄位(
-    form,
-    "id_token",
-    idToken
-  );
-
-
-  /*
-   * 加入頁面
-   */
-  document
-    .body
-    .appendChild(
-      form
-    );
-
-
-  /*
-   * 送出
-   */
-  form.submit();
-
-
-  /*
-   * 移除 form
-   */
-  setTimeout(
-    function() {
-
-      if (
-        form &&
-        form.parentNode
-      ) {
-
-        form.parentNode.removeChild(
-          form
-        );
-
-      }
-
-    },
-    1000
-  );
-
-
-  /*
-   * 開始查詢報名結果
-   */
-  開始查詢報名結果(
-    currentRequestId
-  );
-
-}
-
-
-/* =====================================================
-   加入隱藏欄位
-   ===================================================== */
-
-
-function 加入表單欄位(
-  form,
-  name,
-  value
-) {
-
-  const input =
-    document.createElement(
-      "input"
-    );
-
-
-  input.type =
-    "hidden";
-
-
-  input.name =
-    name;
-
-
-  input.value =
-    value == null
-      ? ""
-      : value;
-
-
-  form.appendChild(
-    input
-  );
-
-}
-
-
-/* =====================================================
-   查詢報名結果
-   ===================================================== */
-
-
-function 開始查詢報名結果(
-  requestId
-) {
-
-  if (!requestId) {
-
-    return;
-
-  }
-
-
-  currentRequestId =
-    requestId;
-
-
-  /*
-   * 清除之前的 Timer
-   */
-  if (statusTimer) {
-
-    clearTimeout(
-      statusTimer
-    );
-
-    statusTimer =
-      null;
-
-  }
-
-
-  let attempts =
-    0;
-
-
-  const maxAttempts =
-    30;
-
-
-  function checkStatus() {
-
-    attempts++;
+    }
 
 
     /*
-     * 如果已經不是這一筆，
-     * 不繼續查。
+     * 產生唯一 request ID
      */
-    if (
-      currentRequestId !==
-      requestId
-    ) {
+
+    bookingRequestId =
+      "REQ_" +
+      Date.now() +
+      "_" +
+      Math.random()
+        .toString(36)
+        .substring(2, 10);
+
+
+    /*
+     * 鎖定按鈕
+     */
+
+    document.getElementById("confirmBtn").disabled =
+      true;
+
+    document.getElementById("cancelBtn").disabled =
+      true;
+
+    document.getElementById("confirmBtn").textContent =
+      "報名處理中...";
+
+
+    document.getElementById("resultArea").innerHTML =
+      "";
+
+
+    /*
+     * 建立隱藏表單
+     */
+
+    const form =
+      document.createElement("form");
+
+
+    form.method =
+      "POST";
+
+
+    form.action =
+      API_URL;
+
+
+    form.target =
+      "bookingFrame";
+
+
+    form.style.display =
+      "none";
+
+
+    addFormField(
+      form,
+      "request_id",
+      bookingRequestId
+    );
+
+
+    addFormField(
+      form,
+      "date",
+      selectedSession.date
+    );
+
+
+    addFormField(
+      form,
+      "session_id",
+      selectedSession.sessionId
+    );
+
+
+    addFormField(
+      form,
+      "name",
+      name
+    );
+
+
+    addFormField(
+      form,
+      "phone",
+      phone
+    );
+
+
+    /*
+     * 最重要：
+     * ID Token 放在 POST Body
+     * 不放在網址
+     */
+
+    addFormField(
+      form,
+      "id_token",
+      currentIDToken
+    );
+
+
+    document.body.appendChild(form);
+
+
+    /*
+     * 送出
+     */
+
+    form.submit();
+
+
+    /*
+     * 移除表單
+     */
+
+    setTimeout(function() {
+
+      if (form.parentNode) {
+
+        form.remove();
+
+      }
+
+    }, 1000);
+
+
+    /*
+     * 開始查詢報名結果
+     */
+
+    startBookingPolling();
+
+  }
+
+
+  /* =====================================================
+     建立 POST 欄位
+  ===================================================== */
+
+  function addFormField(form, name, value) {
+
+    const input =
+      document.createElement("input");
+
+    input.type =
+      "hidden";
+
+    input.name =
+      name;
+
+    input.value =
+      value;
+
+
+    form.appendChild(input);
+
+  }
+
+
+  /* =====================================================
+     輪詢報名結果
+  ===================================================== */
+
+  function startBookingPolling() {
+
+    let elapsed = 0;
+
+    const interval = 1000;
+
+    const timeout = 30000;
+
+
+    bookingTimer =
+      setInterval(function() {
+
+        elapsed += interval;
+
+
+        checkBookingStatus();
+
+
+        if (elapsed >= timeout) {
+
+          clearInterval(bookingTimer);
+
+          bookingTimer = null;
+
+
+          document.getElementById("confirmBtn").disabled =
+            false;
+
+          document.getElementById("cancelBtn").disabled =
+            false;
+
+          document.getElementById("confirmBtn").textContent =
+            "確認報名";
+
+
+          document.getElementById("resultArea").innerHTML =
+            '<div class="fail-box">' +
+            '報名處理時間較久，請稍候再重新整理場次。' +
+            '</div>';
+
+        }
+
+      }, interval);
+
+  }
+
+
+  /* =====================================================
+     查詢報名狀態
+  ===================================================== */
+
+  function checkBookingStatus() {
+
+    if (!bookingRequestId) {
 
       return;
 
@@ -2121,700 +1281,271 @@ function 開始查詢報名結果(
 
 
     const callbackName =
-      "leyuBooking_" +
+      "bookingCallback_" +
       Date.now() +
       "_" +
-      Math.random()
-        .toString(36)
-        .substring(2, 8);
+      (++jsonpCounter);
 
 
-    const script =
-      document.createElement(
-        "script"
-      );
+    window[callbackName] = function(data) {
+
+      try {
+
+        delete window[callbackName];
 
 
-    let finished =
-      false;
+        const script =
+          document.getElementById(callbackName);
+
+        if (script) {
+
+          script.remove();
+
+        }
 
 
-    window[callbackName] =
-      function(data) {
-
-        if (finished) {
+        if (!data) {
 
           return;
 
         }
 
 
-        finished =
-          true;
-
-
-        清理JSONP(
-          script,
-          callbackName
-        );
-
-
-        /*
-         * 處理結果
-         */
-        const done =
-          處理報名結果(
-            data
-          );
-
-
-        /*
-         * 尚未完成
-         */
         if (
-          done === false &&
-          attempts < maxAttempts
+          data.status === "processing"
         ) {
 
-          statusTimer =
-            setTimeout(
-              checkStatus,
-              700
-            );
+          return;
 
         }
 
-      };
+
+        if (
+          data.success === true
+        ) {
+
+          clearInterval(bookingTimer);
+
+          bookingTimer = null;
+
+
+          showBookingSuccess(data);
+
+          return;
+
+        }
+
+
+        if (
+          data.success === false
+        ) {
+
+          clearInterval(bookingTimer);
+
+          bookingTimer = null;
+
+
+          showBookingFailure(
+            data.message ||
+            "報名失敗"
+          );
+
+        }
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+      }
+
+    };
+
+
+    const script =
+      document.createElement("script");
+
+
+    script.id =
+      callbackName;
 
 
     script.src =
-      GAS_API +
+      API_URL +
       "?action=bookingStatus" +
       "&request_id=" +
-      encodeURIComponent(
-        requestId
-      ) +
+      encodeURIComponent(bookingRequestId) +
       "&callback=" +
-      encodeURIComponent(
-        callbackName
-      ) +
+      encodeURIComponent(callbackName) +
       "&_=" +
       Date.now();
 
 
-    script.onerror =
-      function() {
+    script.onerror = function() {
 
-        if (finished) {
+      delete window[callbackName];
 
-          return;
+      script.remove();
 
-        }
-
-
-        finished =
-          true;
+    };
 
 
-        清理JSONP(
-          script,
-          callbackName
-        );
+    document.body.appendChild(script);
 
 
-        /*
-         * 網路偶發錯誤時繼續查詢
-         */
-        if (
-          attempts < maxAttempts
-        ) {
+    /*
+     * 8 秒後清理本次 JSONP
+     */
 
-          statusTimer =
-            setTimeout(
-              checkStatus,
-              1000
-            );
+    setTimeout(function() {
 
-        } else {
+      if (window[callbackName]) {
 
-          bookingBusy =
-            false;
+        delete window[callbackName];
 
+        if (script.parentNode) {
 
-          顯示結果(
-            false,
-            "報名系統回應逾時，請重新整理頁面確認報名結果。"
-          );
-
-
-          const button =
-            document.getElementById(
-              "confirmButton"
-            );
-
-
-          button.disabled =
-            false;
-
-
-          button.textContent =
-            "重新報名";
+          script.remove();
 
         }
 
-      };
-
-
-    document
-      .body
-      .appendChild(
-        script
-      );
-
-  }
-
-
-  /*
-   * 先等後端寫入
-   */
-  statusTimer =
-    setTimeout(
-      checkStatus,
-      700
-    );
-
-}
-
-
-/* =====================================================
-   處理報名結果
-   ===================================================== */
-
-
-function 處理報名結果(
-  data
-) {
-
-  if (!data) {
-
-    return false;
-
-  }
-
-
-  /*
-   * 後端還在處理
-   */
-  if (
-    data.status ===
-    "processing"
-  ) {
-
-    return false;
-
-  }
-
-
-  /*
-   * 成功
-   */
-  if (
-    data.success === true &&
-    (
-      data.status === "success" ||
-      data.status === "completed"
-    )
-  ) {
-
-    顯示成功結果(
-      data
-    );
-
-
-    return true;
-
-  }
-
-
-  /*
-   * 有 success=true 但沒有 status
-   *
-   * 為了相容後端不同回傳格式
-   */
-  if (
-    data.success === true &&
-    !data.status &&
-    (
-      data.message ||
-      data.bookingId ||
-      data.registrationId
-    )
-  ) {
-
-    顯示成功結果(
-      data
-    );
-
-
-    return true;
-
-  }
-
-
-  /*
-   * 失敗
-   */
-  bookingBusy =
-    false;
-
-
-  const message =
-    data.message ||
-    "報名失敗，請稍後再試。";
-
-
-  顯示結果(
-    false,
-    message
-  );
-
-
-  const confirmButton =
-    document.getElementById(
-      "confirmButton"
-    );
-
-
-  confirmButton.disabled =
-    false;
-
-
-  confirmButton.textContent =
-    "重新報名";
-
-
-  return true;
-
-}
-
-
-/* =====================================================
-   顯示成功結果
-   ===================================================== */
-
-
-function 顯示成功結果(
-  data
-) {
-
-  bookingBusy =
-    true;
-
-
-  const date =
-    data.date ||
-    (
-      selectedSession
-        ? selectedSession.date
-        : ""
-    );
-
-
-  const sessionId =
-    data.sessionId ||
-    data.session_id ||
-    (
-      selectedSession
-        ? selectedSession.sessionId
-        : ""
-    );
-
-
-  const resultBox =
-    document.getElementById(
-      "resultBox"
-    );
-
-
-  resultBox.className =
-    "result-box result-success";
-
-
-  resultBox.innerHTML =
-
-    "🎉 <strong>報名成功！</strong><br><br>" +
-
-    "日期：" +
-    escapeHTML(
-      格式化日期(date)
-    ) +
-    "<br>" +
-
-    "第" +
-    escapeHTML(
-      String(sessionId)
-    ) +
-    "梯<br><br>" +
-
-    "請準時到場。";
-
-
-  resultBox.style.display =
-    "block";
-
-
-  /*
-   * 按鈕變成成功
-   */
-  const confirmButton =
-    document.getElementById(
-      "confirmButton"
-    );
-
-
-  confirmButton.disabled =
-    true;
-
-
-  confirmButton.textContent =
-    "報名成功";
-
-
-  /*
-   * ★ 1 秒後自動關閉
-   */
-  setTimeout(
-    function() {
-
-      /*
-       * 防止成功後又被其他請求改變
-       */
-      if (!bookingBusy) {
-
-        return;
-
       }
 
-
-      /*
-       * 關閉 Modal
-       */
-      document
-        .getElementById(
-          "bookingModal"
-        )
-        .classList.remove(
-          "show"
-        );
-
-
-      /*
-       * 清除資料
-       */
-      selectedSession =
-        null;
-
-
-      currentRequestId =
-        "";
-
-
-      bookingBusy =
-        false;
-
-
-      /*
-       * 重新讀取最新名額
-       */
-      載入場次();
-
-    },
-    1000
-  );
-
-}
-
-
-/* =====================================================
-   顯示錯誤結果
-   ===================================================== */
-
-
-function 顯示結果(
-  success,
-  message
-) {
-
-  const resultBox =
-    document.getElementById(
-      "resultBox"
-    );
-
-
-  if (success) {
-
-    resultBox.className =
-      "result-box result-success";
-
-
-    resultBox.innerHTML =
-      "🎉 " +
-      escapeHTML(
-        message
-      );
-
-  } else {
-
-    resultBox.className =
-      "result-box result-error";
-
-
-    resultBox.innerHTML =
-      "❌ " +
-      escapeHTML(
-        message
-      );
+    }, 8000);
 
   }
 
 
-  resultBox.style.display =
-    "block";
+  /* =====================================================
+     報名成功
+  ===================================================== */
 
-}
+  function showBookingSuccess(data) {
 
-
-/* =====================================================
-   顯示頁面錯誤
-   ===================================================== */
-
-
-function 顯示錯誤(
-  message
-) {
-
-  document
-    .getElementById(
-      "loading"
-    )
-    .style.display =
-      "none";
+    document.getElementById("confirmBtn").textContent =
+      "報名成功";
 
 
-  const errorBox =
-    document.getElementById(
-      "errorBox"
-    );
+    document.getElementById("resultArea").innerHTML =
+      '<div class="success-box">' +
+      '<strong>🎉 報名成功！</strong><br><br>' +
+
+      '日期：' +
+      shortDate(selectedSession.date) +
+      '<br>' +
+
+      '第 ' +
+      selectedSession.sessionId +
+      ' 梯<br>' +
+
+      '時間：' +
+      selectedSession.startTime +
+      ' – ' +
+      selectedSession.endTime +
+      '<br><br>' +
+
+      '請準時到場。' +
+
+      '</div>';
 
 
-  errorBox.textContent =
-    message;
+    /*
+     * 重新載入場次
+     */
 
+    setTimeout(function() {
 
-  errorBox.style.display =
-    "block";
+      closeModal();
 
-}
+      loadSessions();
 
-
-/* =====================================================
-   日期格式
-   ===================================================== */
-
-
-function 格式化日期(
-  dateString
-) {
-
-  if (!dateString) {
-
-    return "";
+    }, 1500);
 
   }
 
 
-  const parts =
-    String(
-      dateString
-    ).split("-");
+  /* =====================================================
+     報名失敗
+  ===================================================== */
+
+  function showBookingFailure(message) {
+
+    document.getElementById("confirmBtn").disabled =
+      false;
+
+    document.getElementById("cancelBtn").disabled =
+      false;
+
+    document.getElementById("confirmBtn").textContent =
+      "確認報名";
 
 
-  if (
-    parts.length !== 3
-  ) {
-
-    return String(
-      dateString
-    );
-
-  }
-
-
-  return (
-    parts[1] +
-    "/" +
-    parts[2]
-  );
-
-}
-
-
-/* =====================================================
-   星期
-   ===================================================== */
-
-
-function 星期文字(
-  dateString
-) {
-
-  if (!dateString) {
-
-    return "";
+    document.getElementById("resultArea").innerHTML =
+      '<div class="fail-box">' +
+      '❌ ' +
+      escapeHtml(message) +
+      '</div>';
 
   }
 
 
-  const date =
-    new Date(
-      String(dateString) +
-      "T00:00:00"
-    );
+  /* =====================================================
+     顯示錯誤
+  ===================================================== */
 
+  function showError(message) {
 
-  if (
-    Number.isNaN(
-      date.getTime()
-    )
-  ) {
-
-    return "";
+    document.getElementById("errorArea").innerHTML =
+      '<div class="error-box">' +
+      escapeHtml(message) +
+      '</div>';
 
   }
 
 
-  const weekdays = [
+  /* =====================================================
+     日期簡化
+  ===================================================== */
 
-    "星期日",
+  function shortDate(dateString) {
 
-    "星期一",
-
-    "星期二",
-
-    "星期三",
-
-    "星期四",
-
-    "星期五",
-
-    "星期六"
-
-  ];
+    const parts =
+      dateString.split("-");
 
 
-  return weekdays[
-    date.getDay()
-  ];
+    if (parts.length !== 3) {
 
-}
-
-
-/* =====================================================
-   HTML 安全處理
-   ===================================================== */
-
-
-function escapeHTML(
-  value
-) {
-
-  return String(
-    value == null
-      ? ""
-      : value
-  )
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
-
-}
-
-
-/* =====================================================
-   Enter 鍵
-   ===================================================== */
-
-
-document
-  .getElementById(
-    "phoneInput"
-  )
-  .addEventListener(
-    "keydown",
-    function(event) {
-
-      if (
-        event.key === "Enter"
-      ) {
-
-        event.preventDefault();
-
-        submitBooking();
-
-      }
+      return dateString;
 
     }
-  );
 
 
-/* =====================================================
-   點擊 Modal 外部
-   不直接關閉，避免報名時誤觸
-   ===================================================== */
+    return (
+      parts[1] +
+      "/" +
+      parts[2]
+    );
+
+  }
 
 
-document
-  .getElementById(
-    "bookingModal"
-  )
-  .addEventListener(
-    "click",
-    function(event) {
+  /* =====================================================
+     HTML Escape
+  ===================================================== */
 
-      if (
-        event.target ===
-        this &&
-        !bookingBusy
-      ) {
+  function escapeHtml(text) {
 
-        closeModal();
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
-      }
-
-    }
-  );
-
+  }
 
 </script>
 
-
 </body>
-
 </html>
