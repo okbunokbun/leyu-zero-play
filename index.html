@@ -12,10 +12,13 @@
 
   <title>樂羽會館｜零打報名</title>
 
+
+  <!-- LINE LIFF SDK -->
   <script
     charset="utf-8"
     src="https://static.line-scdn.net/liff/edge/2/sdk.js">
   </script>
+
 
   <style>
 
@@ -23,225 +26,331 @@
       box-sizing: border-box;
     }
 
+
+    html,
     body {
       margin: 0;
-      background: #f4f5f7;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+    }
+
+
+    body {
+      background: #f3f4f6;
       color: #222;
+
       font-family:
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
         "Microsoft JhengHei",
+        "Noto Sans TC",
         Arial,
         sans-serif;
     }
 
-    /* =========================
+
+    /* =====================================
        頂部
-       ========================= */
+       ===================================== */
 
     .header {
       background: #111;
-      color: white;
+      color: #fff;
+
       text-align: center;
-      padding: 22px 15px 20px;
+
+      padding:
+        22px
+        15px
+        20px;
     }
+
 
     .header h1 {
       margin: 0;
+
       font-size: 28px;
       font-weight: 700;
+      letter-spacing: 1px;
     }
+
 
     .header p {
-      margin: 8px 0 0;
-      font-size: 15px;
-      opacity: 0.85;
+      margin: 7px 0 0;
+
+      font-size: 14px;
+
+      color: #ddd;
     }
 
-    /* =========================
+
+    /* =====================================
        主內容
-       ========================= */
+       ===================================== */
 
     .container {
       width: 100%;
-      max-width: 900px;
+      max-width: 1100px;
+
       margin: 0 auto;
+
       padding: 14px;
     }
 
-    /* =========================
+
+    /* =====================================
        LINE 使用者
-       ========================= */
+       ===================================== */
 
     .user-card {
-      background: white;
-      border-radius: 14px;
-      padding: 15px 18px;
-      margin-bottom: 18px;
-      box-shadow:
-        0 2px 10px rgba(0,0,0,0.06);
-
       display: flex;
       align-items: center;
-      gap: 12px;
+
+      background: #fff;
+
+      border-radius: 14px;
+
+      padding: 15px 18px;
+
+      margin-bottom: 18px;
+
+      box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.06);
     }
+
 
     .line-icon {
       width: 42px;
       height: 42px;
+
       border-radius: 50%;
+
       background: #06c755;
-      color: white;
+
+      color: #fff;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      font-size: 16px;
-      font-weight: bold;
+      font-size: 14px;
+      font-weight: 700;
+
+      margin-right: 12px;
+
       flex-shrink: 0;
     }
 
+
     .user-label {
       font-size: 13px;
+
       color: #777;
-      margin-bottom: 2px;
+
+      margin-bottom: 3px;
     }
+
 
     .user-name {
       font-size: 17px;
+
       font-weight: 700;
     }
 
-    /* =========================
-       載入中
-       ========================= */
+
+    /* =====================================
+       載入
+       ===================================== */
 
     .loading {
-      background: white;
+      background: #fff;
+
       border-radius: 14px;
-      padding: 30px;
+
+      padding: 30px 20px;
+
       text-align: center;
+
       color: #666;
+
+      box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.04);
     }
+
+
+    /* =====================================
+       錯誤
+       ===================================== */
 
     .error-box {
+      display: none;
+
       background: #fff0f0;
+
       color: #d93025;
+
       border-radius: 12px;
-      padding: 15px;
+
+      padding: 16px;
+
       line-height: 1.6;
+
+      margin-bottom: 15px;
     }
 
-    /* =========================
-       日期
-       ========================= */
+
+    /* =====================================
+       日期區塊
+       ===================================== */
 
     .date-section {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
+
 
     .date-title {
       border-left: 5px solid #111;
+
       padding-left: 10px;
-      margin: 0 0 10px;
+
+      margin:
+        0
+        0
+        10px;
 
       font-size: 20px;
+
       font-weight: 700;
     }
 
+
     .weekday {
       font-size: 14px;
+
       color: #777;
+
       font-weight: 400;
+
+      margin-left: 4px;
     }
 
-    /* =========================
+
+    /* =====================================
        梯次卡片
-       ========================= */
+       ===================================== */
 
     .session-card {
-      background: white;
-      border-radius: 14px;
-
-      padding: 18px;
-      margin-bottom: 10px;
-
-      box-shadow:
-        0 2px 10px rgba(0,0,0,0.05);
-
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
       gap: 15px;
+
+      background: #fff;
+
+      border-radius: 14px;
+
+      padding: 18px;
+
+      margin-bottom: 10px;
+
+      box-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.05);
     }
+
 
     .session-info {
       min-width: 0;
     }
 
+
     .session-name {
       font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
 
-    .session-time {
-      font-size: 15px;
-      color: #555;
+      font-weight: 700;
+
       margin-bottom: 7px;
     }
 
+
+    .session-time {
+      font-size: 15px;
+
+      color: #555;
+
+      margin-bottom: 7px;
+    }
+
+
     .session-capacity {
       font-size: 14px;
+
       color: #00a65a;
     }
+
 
     .session-full {
       color: #d93025;
     }
 
-    /* =========================
+
+    /* =====================================
        報名按鈕
-       ========================= */
+       ===================================== */
 
     .book-button {
-      border: none;
+      border: 0;
+
       background: #111;
-      color: white;
+
+      color: #fff;
 
       border-radius: 10px;
 
-      padding: 12px 18px;
+      padding:
+        12px
+        18px;
 
       font-size: 15px;
+
       font-weight: 600;
 
       cursor: pointer;
+
       white-space: nowrap;
+
       flex-shrink: 0;
     }
+
 
     .book-button:active {
       transform: scale(0.97);
     }
 
+
     .book-button:disabled {
       background: #aaa;
+
       cursor: not-allowed;
+
+      transform: none;
     }
 
-    /* =========================
+
+    /* =====================================
        Modal
-       ========================= */
+       ===================================== */
 
     .modal {
       display: none;
 
       position: fixed;
-      z-index: 9999;
+
+      z-index: 99999;
 
       left: 0;
       top: 0;
@@ -250,75 +359,103 @@
       height: 100%;
 
       background:
-        rgba(0,0,0,0.55);
+        rgba(0, 0, 0, 0.55);
 
-      padding: 20px;
+      padding: 15px;
 
       align-items: center;
+
       justify-content: center;
     }
+
 
     .modal.show {
       display: flex;
     }
 
-    .modal-box {
-      background: white;
 
+    .modal-box {
       width: 100%;
-      max-width: 450px;
+
+      max-width: 460px;
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      background: #fff;
 
       border-radius: 18px;
 
       padding: 22px;
-
-      max-height: 90vh;
-      overflow-y: auto;
     }
+
 
     .modal-title {
       font-size: 22px;
+
       font-weight: 700;
+
       margin-bottom: 14px;
     }
 
+
     .booking-summary {
-      color: #555;
       font-size: 14px;
-      line-height: 1.8;
-      margin-bottom: 15px;
+
+      color: #555;
+
+      line-height: 1.9;
+
+      margin-bottom: 12px;
     }
+
 
     .form-label {
       display: block;
 
       font-size: 15px;
+
       font-weight: 700;
 
-      margin: 12px 0 7px;
+      margin:
+        12px
+        0
+        7px;
     }
+
 
     .form-input {
       width: 100%;
 
-      border: 1px solid #ccc;
+      height: 46px;
+
+      border:
+        1px solid
+        #ccc;
 
       border-radius: 10px;
 
-      padding: 12px;
+      padding:
+        0
+        12px;
 
       font-size: 16px;
 
       outline: none;
+
+      background: #fff;
     }
+
 
     .form-input:focus {
       border-color: #111;
     }
 
-    /* =========================
-       成功 / 失敗訊息
-       ========================= */
+
+    /* =====================================
+       結果訊息
+       ===================================== */
 
     .result-box {
       display: none;
@@ -329,38 +466,47 @@
 
       margin-top: 14px;
 
-      line-height: 1.8;
-
       font-size: 15px;
+
+      line-height: 1.8;
     }
+
 
     .result-success {
       display: block;
-      background: #e9f9ef;
+
+      background: #e8f8ee;
+
       color: #008a45;
     }
 
+
     .result-error {
       display: block;
+
       background: #fff0f0;
+
       color: #d93025;
     }
 
-    /* =========================
+
+    /* =====================================
        Modal 按鈕
-       ========================= */
+       ===================================== */
 
     .modal-buttons {
       display: flex;
+
       gap: 10px;
 
       margin-top: 18px;
     }
 
+
     .modal-button {
       flex: 1;
 
-      border: none;
+      border: 0;
 
       border-radius: 10px;
 
@@ -371,71 +517,106 @@
       cursor: pointer;
     }
 
+
     .cancel-button {
       background: #eee;
+
       color: #333;
     }
 
+
     .confirm-button {
       background: #06c755;
-      color: white;
+
+      color: #fff;
+
       font-weight: 700;
     }
 
+
     .confirm-button:disabled {
       background: #aaa;
+
       cursor: not-allowed;
     }
 
-    /* =========================
-       iframe
-       ========================= */
+
+    /* =====================================
+       隱藏 iframe
+       ===================================== */
 
     #postFrame {
       display: none;
+
       width: 0;
       height: 0;
+
       border: 0;
     }
 
-    /* =========================
+
+    /* =====================================
        手機版
-       ========================= */
+       ===================================== */
 
     @media (max-width: 600px) {
 
       .header {
-        padding: 18px 12px;
+        padding:
+          18px
+          12px
+          17px;
       }
+
 
       .header h1 {
         font-size: 24px;
       }
 
+
       .container {
         padding: 10px;
       }
+
 
       .session-card {
         padding: 15px;
       }
 
+
       .session-name {
         font-size: 17px;
       }
 
-      .book-button {
-        padding: 11px 14px;
+
+      .session-time {
         font-size: 14px;
       }
 
-      .modal {
-        padding: 12px;
+
+      .session-capacity {
+        font-size: 13px;
       }
 
+
+      .book-button {
+        padding:
+          11px
+          14px;
+
+        font-size: 14px;
+      }
+
+
+      .modal {
+        padding: 10px;
+      }
+
+
       .modal-box {
-        border-radius: 16px;
         padding: 18px;
+
+        border-radius: 16px;
       }
 
     }
@@ -447,9 +628,10 @@
 
 <body>
 
-  <!-- =========================
+
+  <!-- =====================================
        Header
-       ========================= -->
+       ===================================== -->
 
   <header class="header">
 
@@ -460,11 +642,14 @@
   </header>
 
 
-  <!-- =========================
-       Main
-       ========================= -->
+  <!-- =====================================
+       主內容
+       ===================================== -->
 
   <main class="container">
+
+
+    <!-- LINE 使用者 -->
 
     <div
       id="userCard"
@@ -494,6 +679,8 @@
     </div>
 
 
+    <!-- 載入中 -->
+
     <div
       id="loading"
       class="loading"
@@ -502,23 +689,27 @@
     </div>
 
 
+    <!-- 錯誤 -->
+
     <div
       id="errorBox"
       class="error-box"
-      style="display:none;"
     ></div>
 
+
+    <!-- 場次 -->
 
     <div
       id="sessionsContainer"
     ></div>
 
+
   </main>
 
 
-  <!-- =========================
-       Booking Modal
-       ========================= -->
+  <!-- =====================================
+       報名 Modal
+       ===================================== -->
 
   <div
     id="bookingModal"
@@ -526,6 +717,7 @@
   >
 
     <div class="modal-box">
+
 
       <div class="modal-title">
         零打報名
@@ -538,9 +730,12 @@
       ></div>
 
 
+      <!-- 姓名 -->
+
       <label class="form-label">
         姓名
       </label>
+
 
       <input
         id="nameInput"
@@ -551,9 +746,12 @@
       >
 
 
+      <!-- 手機 -->
+
       <label class="form-label">
         手機號碼
       </label>
+
 
       <input
         id="phoneInput"
@@ -566,11 +764,15 @@
       >
 
 
+      <!-- 結果 -->
+
       <div
         id="resultBox"
         class="result-box"
       ></div>
 
+
+      <!-- 按鈕 -->
 
       <div class="modal-buttons">
 
@@ -595,14 +797,15 @@
 
       </div>
 
+
     </div>
 
   </div>
 
 
-  <!-- =========================
-       Hidden POST iframe
-       ========================= -->
+  <!-- =====================================
+       隱藏 POST iframe
+       ===================================== -->
 
   <iframe
     id="postFrame"
@@ -613,9 +816,10 @@
 <script>
 
 
-/*************************************************
- * 系統設定
- *************************************************/
+/* =====================================================
+   系統設定
+   ===================================================== */
+
 
 const LIFF_ID =
   "2011603755-U8bYBa4n";
@@ -623,6 +827,11 @@ const LIFF_ID =
 
 const GAS_API =
   "https://script.google.com/macros/s/AKfycbyFxTErNwhLKgIhDuuZwILEyC39oXwAEdzuPhl1uLvWsACZ5DzAlZIU5pCEjxxf8rAnyg/exec";
+
+
+/* =====================================================
+   全域變數
+   ===================================================== */
 
 
 let lineProfile = null;
@@ -633,12 +842,15 @@ let selectedSession = null;
 
 let bookingBusy = false;
 
+let currentRequestId = "";
+
 let statusTimer = null;
 
 
-/*************************************************
- * 頁面初始化
- *************************************************/
+/* =====================================================
+   頁面載入
+   ===================================================== */
+
 
 window.addEventListener(
   "load",
@@ -646,13 +858,15 @@ window.addEventListener(
 );
 
 
+/* =====================================================
+   初始化 LIFF
+   ===================================================== */
+
+
 async function initLIFF() {
 
   try {
 
-    /*
-     * 初始化 LINE LIFF
-     */
     await liff.init({
       liffId: LIFF_ID,
       withLoginOnExternalBrowser: true
@@ -660,7 +874,7 @@ async function initLIFF() {
 
 
     /*
-     * 尚未登入
+     * 如果沒有登入 LINE
      */
     if (!liff.isLoggedIn()) {
 
@@ -679,7 +893,7 @@ async function initLIFF() {
 
 
     /*
-     * 取得 ID Token
+     * 取得 LINE ID Token
      */
     idToken =
       liff.getIDToken();
@@ -695,7 +909,7 @@ async function initLIFF() {
 
 
     /*
-     * 顯示使用者
+     * 顯示使用者名稱
      */
     document
       .getElementById("userName")
@@ -711,18 +925,22 @@ async function initLIFF() {
 
 
     /*
-     * 載入場次
+     * 讀取場次
      */
     載入場次();
 
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      "LIFF 初始化錯誤：",
+      error
+    );
+
 
     顯示錯誤(
       "LINE 初始化失敗：" +
-      (error.message || error)
+      取得錯誤訊息(error)
     );
 
   }
@@ -730,25 +948,100 @@ async function initLIFF() {
 }
 
 
-/*************************************************
- * JSONP 取得場次
- *************************************************/
+/* =====================================================
+   取得錯誤訊息
+   ===================================================== */
+
+
+function 取得錯誤訊息(error) {
+
+  if (!error) {
+
+    return "未知錯誤";
+
+  }
+
+
+  if (error.message) {
+
+    return error.message;
+
+  }
+
+
+  return String(error);
+
+}
+
+
+/* =====================================================
+   JSONP 讀取場次
+   ===================================================== */
+
 
 function 載入場次() {
 
+  /*
+   * 清除舊錯誤
+   */
+  const errorBox =
+    document.getElementById(
+      "errorBox"
+    );
+
+
+  errorBox.style.display =
+    "none";
+
+
+  /*
+   * 顯示載入
+   */
+  document
+    .getElementById("loading")
+    .style.display =
+      "block";
+
+
+  /*
+   * 建立唯一 callback
+   */
   const callbackName =
     "leyuSessions_" +
-    Date.now();
+    Date.now() +
+    "_" +
+    Math.random()
+      .toString(36)
+      .substring(2, 8);
+
+
+  const script =
+    document.createElement(
+      "script"
+    );
+
+
+  let finished = false;
 
 
   window[callbackName] =
     function(data) {
 
+      if (finished) {
+
+        return;
+
+      }
+
+
+      finished = true;
+
+
       try {
 
         if (
           !data ||
-          !data.success
+          data.success !== true
         ) {
 
           throw new Error(
@@ -771,13 +1064,12 @@ function 載入場次() {
         console.error(error);
 
         顯示錯誤(
-          error.message ||
-          "場次資料讀取失敗"
+          取得錯誤訊息(error)
         );
 
       } finally {
 
-        清理JSONPScript(
+        清理JSONP(
           script,
           callbackName
         );
@@ -785,12 +1077,6 @@ function 載入場次() {
       }
 
     };
-
-
-  const script =
-    document.createElement(
-      "script"
-    );
 
 
   script.src =
@@ -807,11 +1093,22 @@ function 載入場次() {
   script.onerror =
     function() {
 
+      if (finished) {
+
+        return;
+
+      }
+
+
+      finished = true;
+
+
       顯示錯誤(
-        "無法連線到報名系統"
+        "無法連線到報名系統，請重新整理頁面。"
       );
 
-      清理JSONPScript(
+
+      清理JSONP(
         script,
         callbackName
       );
@@ -826,16 +1123,20 @@ function 載入場次() {
 }
 
 
-/*************************************************
- * 清除 JSONP
- *************************************************/
+/* =====================================================
+   清理 JSONP
+   ===================================================== */
 
-function 清理JSONPScript(
+
+function 清理JSONP(
   script,
   callbackName
 ) {
 
-  if (script && script.parentNode) {
+  if (
+    script &&
+    script.parentNode
+  ) {
 
     script.parentNode.removeChild(
       script
@@ -848,14 +1149,17 @@ function 清理JSONPScript(
 
     delete window[callbackName];
 
-  } catch (error) {}
+  } catch (error) {
+
+  }
 
 }
 
 
-/*************************************************
- * 顯示場次
- *************************************************/
+/* =====================================================
+   顯示場次
+   ===================================================== */
+
 
 function 顯示場次(
   sessions
@@ -873,16 +1177,46 @@ function 顯示場次(
     );
 
 
-  container.innerHTML = "";
+  container.innerHTML =
+    "";
+
+
+  /*
+   * 只接受正常的 1～5 梯
+   *
+   * 可以避免 Google Sheet 裡
+   * 舊資料或異常資料被顯示。
+   */
+  const validSessions =
+    (sessions || []).filter(
+      function(session) {
+
+        const id =
+          String(
+            session.sessionId
+          );
+
+
+        return [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ].includes(id);
+
+      }
+    );
 
 
   if (
-    !sessions ||
-    sessions.length === 0
+    validSessions.length === 0
   ) {
 
     container.innerHTML =
-      '<div class="loading">目前沒有可報名場次</div>';
+      '<div class="loading">' +
+      '目前沒有可報名場次' +
+      '</div>';
 
     return;
 
@@ -890,29 +1224,41 @@ function 顯示場次(
 
 
   /*
-   * 依日期分組
+   * 日期分組
    */
   const grouped = {};
 
 
-  sessions.forEach(
+  validSessions.forEach(
     function(session) {
 
-      if (!grouped[session.date]) {
+      if (!session.date) {
 
-        grouped[session.date] = [];
+        return;
 
       }
 
 
-      grouped[session.date].push(
-        session
-      );
+      if (
+        !grouped[session.date]
+      ) {
+
+        grouped[session.date] =
+          [];
+
+      }
+
+
+      grouped[session.date]
+        .push(session);
 
     }
   );
 
 
+  /*
+   * 日期排序
+   */
   Object.keys(grouped)
     .sort()
     .forEach(
@@ -928,34 +1274,50 @@ function 顯示場次(
           "date-section";
 
 
-        const dateTitle =
+        /*
+         * 日期標題
+         */
+        const title =
           document.createElement(
             "h2"
           );
 
 
-        dateTitle.className =
+        title.className =
           "date-title";
 
 
-        dateTitle.innerHTML =
-          格式化日期(date) +
+        title.innerHTML =
+          escapeHTML(
+            格式化日期(date)
+          ) +
           ' <span class="weekday">' +
-          星期文字(date) +
+          escapeHTML(
+            星期文字(date)
+          ) +
           '</span>';
 
 
         section.appendChild(
-          dateTitle
+          title
         );
 
 
+        /*
+         * 梯次排序
+         */
         grouped[date]
           .sort(
-            function(a,b) {
+            function(a, b) {
 
-              return Number(a.sessionId) -
-                     Number(b.sessionId);
+              return (
+                Number(
+                  a.sessionId
+                ) -
+                Number(
+                  b.sessionId
+                )
+              );
 
             }
           )
@@ -982,9 +1344,10 @@ function 顯示場次(
 }
 
 
-/*************************************************
- * 建立梯次卡片
- *************************************************/
+/* =====================================================
+   建立梯次卡片
+   ===================================================== */
+
 
 function 建立梯次卡片(
   session
@@ -1000,6 +1363,9 @@ function 建立梯次卡片(
     "session-card";
 
 
+  /*
+   * 左側資料
+   */
   const info =
     document.createElement(
       "div"
@@ -1010,38 +1376,47 @@ function 建立梯次卡片(
     "session-info";
 
 
-  const name =
+  /*
+   * 梯次
+   */
+  const sessionName =
     document.createElement(
       "div"
     );
 
 
-  name.className =
+  sessionName.className =
     "session-name";
 
 
-  name.textContent =
+  sessionName.textContent =
     "第" +
     session.sessionId +
     "梯";
 
 
-  const time =
+  /*
+   * 時間
+   */
+  const sessionTime =
     document.createElement(
       "div"
     );
 
 
-  time.className =
+  sessionTime.className =
     "session-time";
 
 
-  time.textContent =
+  sessionTime.textContent =
     session.startTime +
     " – " +
     session.endTime;
 
 
+  /*
+   * 名額
+   */
   const capacity =
     document.createElement(
       "div"
@@ -1052,16 +1427,28 @@ function 建立梯次卡片(
     "session-capacity";
 
 
+  const remaining =
+    Number(
+      session.remaining
+    ) || 0;
+
+
+  const booked =
+    Number(
+      session.booked
+    ) || 0;
+
+
   capacity.textContent =
     "已報名 " +
-    session.booked +
+    booked +
     " 人｜剩餘 " +
-    session.remaining +
+    remaining +
     " 人";
 
 
   if (
-    Number(session.remaining) <= 0
+    remaining <= 0
   ) {
 
     capacity.classList.add(
@@ -1071,13 +1458,24 @@ function 建立梯次卡片(
   }
 
 
-  info.appendChild(name);
-
-  info.appendChild(time);
-
-  info.appendChild(capacity);
+  info.appendChild(
+    sessionName
+  );
 
 
+  info.appendChild(
+    sessionTime
+  );
+
+
+  info.appendChild(
+    capacity
+  );
+
+
+  /*
+   * 右側按鈕
+   */
   const button =
     document.createElement(
       "button"
@@ -1088,27 +1486,46 @@ function 建立梯次卡片(
     "book-button";
 
 
-  button.textContent =
-    Number(session.remaining) > 0
-      ? "立即報名"
-      : "已額滿";
+  button.type =
+    "button";
 
 
-  button.disabled =
-    Number(session.remaining) <= 0;
+  if (remaining > 0) {
+
+    button.textContent =
+      "立即報名";
+
+    button.disabled =
+      false;
+
+    button.onclick =
+      function() {
+
+        openModal(
+          session
+        );
+
+      };
+
+  } else {
+
+    button.textContent =
+      "已額滿";
+
+    button.disabled =
+      true;
+
+  }
 
 
-  button.onclick =
-    function() {
-
-      openModal(session);
-
-    };
+  card.appendChild(
+    info
+  );
 
 
-  card.appendChild(info);
-
-  card.appendChild(button);
+  card.appendChild(
+    button
+  );
 
 
   return card;
@@ -1116,17 +1533,26 @@ function 建立梯次卡片(
 }
 
 
-/*************************************************
- * 開啟報名視窗
- *************************************************/
+/* =====================================================
+   開啟報名視窗
+   ===================================================== */
+
 
 function openModal(
   session
 ) {
 
+  if (!session) {
+
+    return;
+
+  }
+
+
   if (
-    !session ||
-    Number(session.remaining) <= 0
+    Number(
+      session.remaining
+    ) <= 0
   ) {
 
     return;
@@ -1142,31 +1568,8 @@ function openModal(
     false;
 
 
-  document
-    .getElementById("bookingSummary")
-    .innerHTML =
-
-      "日期：<strong>" +
-      格式化日期(session.date) +
-      "</strong><br>" +
-
-      "梯次：<strong>第" +
-      session.sessionId +
-      "梯</strong><br>" +
-
-      "時間：<strong>" +
-      session.startTime +
-      " – " +
-      session.endTime +
-      "</strong><br>" +
-
-      "剩餘名額：<strong>" +
-      session.remaining +
-      " 人</strong>";
-
-
   /*
-   * 清除上一筆結果
+   * 清除舊結果
    */
   const resultBox =
     document.getElementById(
@@ -1182,41 +1585,56 @@ function openModal(
     "result-box";
 
 
-  resultBox.innerHTML =
+  resultBox.textContent =
     "";
 
 
   /*
-   * 恢復按鈕
-   */
-  const confirmButton =
-    document.getElementById(
-      "confirmButton"
-    );
-
-
-  confirmButton.disabled =
-    false;
-
-
-  confirmButton.textContent =
-    "確認報名";
-
-
-  /*
-   * 顯示 Modal
+   * 顯示場次資料
    */
   document
     .getElementById(
-      "bookingModal"
+      "bookingSummary"
     )
-    .classList.add(
-      "show"
-    );
+    .innerHTML =
+
+      "日期：<strong>" +
+      escapeHTML(
+        格式化日期(
+          session.date
+        )
+      ) +
+      "</strong><br>" +
+
+      "梯次：<strong>第" +
+      escapeHTML(
+        String(
+          session.sessionId
+        )
+      ) +
+      "梯</strong><br>" +
+
+      "時間：<strong>" +
+      escapeHTML(
+        session.startTime
+      ) +
+      " – " +
+      escapeHTML(
+        session.endTime
+      ) +
+      "</strong><br>" +
+
+      "剩餘名額：<strong>" +
+      escapeHTML(
+        String(
+          session.remaining
+        )
+      ) +
+      " 人</strong>";
 
 
   /*
-   * 姓名先清空
+   * 清空輸入
    */
   document
     .getElementById(
@@ -1234,6 +1652,38 @@ function openModal(
       "";
 
 
+  /*
+   * 恢復確認按鈕
+   */
+  const confirmButton =
+    document.getElementById(
+      "confirmButton"
+    );
+
+
+  confirmButton.disabled =
+    false;
+
+
+  confirmButton.textContent =
+    "確認報名";
+
+
+  /*
+   * 顯示視窗
+   */
+  document
+    .getElementById(
+      "bookingModal"
+    )
+    .classList.add(
+      "show"
+    );
+
+
+  /*
+   * 自動 focus 姓名
+   */
   setTimeout(
     function() {
 
@@ -1250,12 +1700,16 @@ function openModal(
 }
 
 
-/*************************************************
- * 關閉報名視窗
- *************************************************/
+/* =====================================================
+   關閉 Modal
+   ===================================================== */
+
 
 function closeModal() {
 
+  /*
+   * 報名處理中不可關閉
+   */
   if (bookingBusy) {
 
     return;
@@ -1275,15 +1729,23 @@ function closeModal() {
   selectedSession =
     null;
 
+
+  currentRequestId =
+    "";
+
 }
 
 
-/*************************************************
- * 執行報名
- *************************************************/
+/* =====================================================
+   送出報名
+   ===================================================== */
+
 
 function submitBooking() {
 
+  /*
+   * 防止重複點擊
+   */
   if (bookingBusy) {
 
     return;
@@ -1293,11 +1755,19 @@ function submitBooking() {
 
   if (!selectedSession) {
 
+    顯示結果(
+      false,
+      "請重新選擇報名梯次"
+    );
+
     return;
 
   }
 
 
+  /*
+   * 取得資料
+   */
   const name =
     document
       .getElementById(
@@ -1349,13 +1819,13 @@ function submitBooking() {
 
 
   /*
-   * ID Token
+   * LINE Token
    */
   if (!idToken) {
 
     顯示結果(
       false,
-      "LINE 身分驗證已失效，請重新開啟報名頁面"
+      "LINE 身分驗證已失效，請重新開啟報名頁面。"
     );
 
     return;
@@ -1363,6 +1833,28 @@ function submitBooking() {
   }
 
 
+  /*
+   * 名額再次確認
+   */
+  if (
+    Number(
+      selectedSession.remaining
+    ) <= 0
+  ) {
+
+    顯示結果(
+      false,
+      "很抱歉，這個梯次已額滿。請重新整理頁面。"
+    );
+
+    return;
+
+  }
+
+
+  /*
+   * 開始處理
+   */
   bookingBusy =
     true;
 
@@ -1382,19 +1874,19 @@ function submitBooking() {
 
 
   /*
-   * 建立唯一 request ID
+   * 建立唯一 Request ID
    */
-  const requestId =
+  currentRequestId =
     "R" +
     Date.now() +
     "_" +
     Math.random()
       .toString(36)
-      .substring(2,10);
+      .substring(2, 10);
 
 
   /*
-   * 建立隱藏表單
+   * 建立 POST Form
    */
   const form =
     document.createElement(
@@ -1418,35 +1910,50 @@ function submitBooking() {
     "none";
 
 
-  加入欄位(
+  /*
+   * Request ID
+   */
+  加入表單欄位(
     form,
     "request_id",
-    requestId
+    currentRequestId
   );
 
 
-  加入欄位(
+  /*
+   * 日期
+   */
+  加入表單欄位(
     form,
     "date",
     selectedSession.date
   );
 
 
-  加入欄位(
+  /*
+   * 梯次
+   */
+  加入表單欄位(
     form,
     "session_id",
     selectedSession.sessionId
   );
 
 
-  加入欄位(
+  /*
+   * 姓名
+   */
+  加入表單欄位(
     form,
     "name",
     name
   );
 
 
-  加入欄位(
+  /*
+   * 手機
+   */
+  加入表單欄位(
     form,
     "phone",
     phone
@@ -1456,18 +1963,23 @@ function submitBooking() {
   /*
    * LINE ID Token
    *
-   * 不放在 URL
+   * 不放在 URL。
    */
-  加入欄位(
+  加入表單欄位(
     form,
     "id_token",
     idToken
   );
 
 
+  /*
+   * 加入頁面
+   */
   document
     .body
-    .appendChild(form);
+    .appendChild(
+      form
+    );
 
 
   /*
@@ -1477,12 +1989,15 @@ function submitBooking() {
 
 
   /*
-   * 移除表單
+   * 移除 form
    */
   setTimeout(
     function() {
 
-      if (form.parentNode) {
+      if (
+        form &&
+        form.parentNode
+      ) {
 
         form.parentNode.removeChild(
           form
@@ -1496,20 +2011,21 @@ function submitBooking() {
 
 
   /*
-   * 開始查詢結果
+   * 開始查詢報名結果
    */
   開始查詢報名結果(
-    requestId
+    currentRequestId
   );
 
 }
 
 
-/*************************************************
- * 加入表單欄位
- *************************************************/
+/* =====================================================
+   加入隱藏欄位
+   ===================================================== */
 
-function 加入欄位(
+
+function 加入表單欄位(
   form,
   name,
   value
@@ -1530,7 +2046,9 @@ function 加入欄位(
 
 
   input.value =
-    value;
+    value == null
+      ? ""
+      : value;
 
 
   form.appendChild(
@@ -1540,19 +2058,28 @@ function 加入欄位(
 }
 
 
-/*************************************************
- * 查詢報名結果
- *************************************************/
+/* =====================================================
+   查詢報名結果
+   ===================================================== */
+
 
 function 開始查詢報名結果(
   requestId
 ) {
 
-  let count = 0;
+  if (!requestId) {
+
+    return;
+
+  }
+
+
+  currentRequestId =
+    requestId;
 
 
   /*
-   * 清除舊 Timer
+   * 清除之前的 Timer
    */
   if (statusTimer) {
 
@@ -1560,12 +2087,37 @@ function 開始查詢報名結果(
       statusTimer
     );
 
+    statusTimer =
+      null;
+
   }
 
 
-  function check() {
+  let attempts =
+    0;
 
-    count++;
+
+  const maxAttempts =
+    30;
+
+
+  function checkStatus() {
+
+    attempts++;
+
+
+    /*
+     * 如果已經不是這一筆，
+     * 不繼續查。
+     */
+    if (
+      currentRequestId !==
+      requestId
+    ) {
+
+      return;
+
+    }
 
 
     const callbackName =
@@ -1574,17 +2126,17 @@ function 開始查詢報名結果(
       "_" +
       Math.random()
         .toString(36)
-        .substring(2,7);
-
-
-    let finished =
-      false;
+        .substring(2, 8);
 
 
     const script =
       document.createElement(
         "script"
       );
+
+
+    let finished =
+      false;
 
 
     window[callbackName] =
@@ -1601,18 +2153,34 @@ function 開始查詢報名結果(
           true;
 
 
-        try {
+        清理JSONP(
+          script,
+          callbackName
+        );
 
+
+        /*
+         * 處理結果
+         */
+        const done =
           處理報名結果(
             data
           );
 
-        } finally {
 
-          清理JSONPScript(
-            script,
-            callbackName
-          );
+        /*
+         * 尚未完成
+         */
+        if (
+          done === false &&
+          attempts < maxAttempts
+        ) {
+
+          statusTimer =
+            setTimeout(
+              checkStatus,
+              700
+            );
 
         }
 
@@ -1648,21 +2216,22 @@ function 開始查詢報名結果(
           true;
 
 
-        清理JSONPScript(
+        清理JSONP(
           script,
           callbackName
         );
 
 
         /*
-         * 不立即判定失敗，
-         * 繼續查詢。
+         * 網路偶發錯誤時繼續查詢
          */
-        if (count < 20) {
+        if (
+          attempts < maxAttempts
+        ) {
 
           statusTimer =
             setTimeout(
-              check,
+              checkStatus,
               1000
             );
 
@@ -1676,6 +2245,20 @@ function 開始查詢報名結果(
             false,
             "報名系統回應逾時，請重新整理頁面確認報名結果。"
           );
+
+
+          const button =
+            document.getElementById(
+              "confirmButton"
+            );
+
+
+          button.disabled =
+            false;
+
+
+          button.textContent =
+            "重新報名";
 
         }
 
@@ -1692,20 +2275,21 @@ function 開始查詢報名結果(
 
 
   /*
-   * 第一次延遲0.8秒
+   * 先等後端寫入
    */
   statusTimer =
     setTimeout(
-      check,
-      800
+      checkStatus,
+      700
     );
 
 }
 
 
-/*************************************************
- * 處理報名結果
- *************************************************/
+/* =====================================================
+   處理報名結果
+   ===================================================== */
+
 
 function 處理報名結果(
   data
@@ -1713,42 +2297,20 @@ function 處理報名結果(
 
   if (!data) {
 
-    return;
+    return false;
 
   }
 
 
   /*
-   * 尚未完成
+   * 後端還在處理
    */
   if (
     data.status ===
     "processing"
   ) {
 
-    /*
-     * 繼續查詢
-     */
-    statusTimer =
-      setTimeout(
-        function() {
-
-          const requestId =
-            取得目前RequestId();
-
-          if (requestId) {
-
-            開始查詢報名結果(
-              requestId
-            );
-
-          }
-
-        },
-        1000
-      );
-
-    return;
+    return false;
 
   }
 
@@ -1758,78 +2320,43 @@ function 處理報名結果(
    */
   if (
     data.success === true &&
-    data.status === "success"
+    (
+      data.status === "success" ||
+      data.status === "completed"
+    )
   ) {
 
-    bookingBusy =
-      true;
-
-
-    const resultBox =
-      document.getElementById(
-        "resultBox"
-      );
-
-
-    resultBox.className =
-      "result-box result-success";
-
-
-    resultBox.innerHTML =
-
-      "🎉 <strong>報名成功！</strong><br><br>" +
-
-      "日期：" +
-      格式化日期(
-        data.date ||
-        selectedSession.date
-      ) +
-      "<br>" +
-
-      "第" +
-      (
-        data.sessionId ||
-        selectedSession.sessionId
-      ) +
-      "梯<br><br>" +
-
-      "請準時到場。";
-
-
-    resultBox.style.display =
-      "block";
-
-
-    const confirmButton =
-      document.getElementById(
-        "confirmButton"
-      );
-
-
-    confirmButton.disabled =
-      true;
-
-
-    confirmButton.textContent =
-      "報名成功";
-
-
-    /*
-     * ★ 這就是這次修正的重點
-     *
-     * 成功後1秒自動關閉
-     */
-    setTimeout(
-      function() {
-
-        關閉成功並刷新();
-
-      },
-      1000
+    顯示成功結果(
+      data
     );
 
 
-    return;
+    return true;
+
+  }
+
+
+  /*
+   * 有 success=true 但沒有 status
+   *
+   * 為了相容後端不同回傳格式
+   */
+  if (
+    data.success === true &&
+    !data.status &&
+    (
+      data.message ||
+      data.bookingId ||
+      data.registrationId
+    )
+  ) {
+
+    顯示成功結果(
+      data
+    );
+
+
+    return true;
 
   }
 
@@ -1843,7 +2370,7 @@ function 處理報名結果(
 
   const message =
     data.message ||
-    "報名失敗，請稍後再試";
+    "報名失敗，請稍後再試。";
 
 
   顯示結果(
@@ -1865,46 +2392,153 @@ function 處理報名結果(
   confirmButton.textContent =
     "重新報名";
 
+
+  return true;
+
 }
 
 
-/*************************************************
- * 關閉成功並刷新
- *************************************************/
+/* =====================================================
+   顯示成功結果
+   ===================================================== */
 
-function 關閉成功並刷新() {
 
-  /*
-   * 關閉 Modal
-   */
-  document
-    .getElementById(
-      "bookingModal"
-    )
-    .classList.remove(
-      "show"
+function 顯示成功結果(
+  data
+) {
+
+  bookingBusy =
+    true;
+
+
+  const date =
+    data.date ||
+    (
+      selectedSession
+        ? selectedSession.date
+        : ""
     );
 
 
-  selectedSession =
-    null;
+  const sessionId =
+    data.sessionId ||
+    data.session_id ||
+    (
+      selectedSession
+        ? selectedSession.sessionId
+        : ""
+    );
 
 
-  bookingBusy =
-    false;
+  const resultBox =
+    document.getElementById(
+      "resultBox"
+    );
+
+
+  resultBox.className =
+    "result-box result-success";
+
+
+  resultBox.innerHTML =
+
+    "🎉 <strong>報名成功！</strong><br><br>" +
+
+    "日期：" +
+    escapeHTML(
+      格式化日期(date)
+    ) +
+    "<br>" +
+
+    "第" +
+    escapeHTML(
+      String(sessionId)
+    ) +
+    "梯<br><br>" +
+
+    "請準時到場。";
+
+
+  resultBox.style.display =
+    "block";
 
 
   /*
-   * 重新讀取場次
+   * 按鈕變成成功
    */
-  載入場次();
+  const confirmButton =
+    document.getElementById(
+      "confirmButton"
+    );
+
+
+  confirmButton.disabled =
+    true;
+
+
+  confirmButton.textContent =
+    "報名成功";
+
+
+  /*
+   * ★ 1 秒後自動關閉
+   */
+  setTimeout(
+    function() {
+
+      /*
+       * 防止成功後又被其他請求改變
+       */
+      if (!bookingBusy) {
+
+        return;
+
+      }
+
+
+      /*
+       * 關閉 Modal
+       */
+      document
+        .getElementById(
+          "bookingModal"
+        )
+        .classList.remove(
+          "show"
+        );
+
+
+      /*
+       * 清除資料
+       */
+      selectedSession =
+        null;
+
+
+      currentRequestId =
+        "";
+
+
+      bookingBusy =
+        false;
+
+
+      /*
+       * 重新讀取最新名額
+       */
+      載入場次();
+
+    },
+    1000
+  );
 
 }
 
 
-/*************************************************
- * 顯示結果
- *************************************************/
+/* =====================================================
+   顯示錯誤結果
+   ===================================================== */
+
 
 function 顯示結果(
   success,
@@ -1917,16 +2551,31 @@ function 顯示結果(
     );
 
 
-  resultBox.innerHTML =
-    success
-      ? "🎉 " + message
-      : "❌ " + message;
+  if (success) {
+
+    resultBox.className =
+      "result-box result-success";
 
 
-  resultBox.className =
-    success
-      ? "result-box result-success"
-      : "result-box result-error";
+    resultBox.innerHTML =
+      "🎉 " +
+      escapeHTML(
+        message
+      );
+
+  } else {
+
+    resultBox.className =
+      "result-box result-error";
+
+
+    resultBox.innerHTML =
+      "❌ " +
+      escapeHTML(
+        message
+      );
+
+  }
 
 
   resultBox.style.display =
@@ -1935,9 +2584,10 @@ function 顯示結果(
 }
 
 
-/*************************************************
- * 顯示錯誤
- *************************************************/
+/* =====================================================
+   顯示頁面錯誤
+   ===================================================== */
+
 
 function 顯示錯誤(
   message
@@ -1967,23 +2617,35 @@ function 顯示錯誤(
 }
 
 
-/*************************************************
- * 日期格式
- *************************************************/
+/* =====================================================
+   日期格式
+   ===================================================== */
+
 
 function 格式化日期(
   dateString
 ) {
 
+  if (!dateString) {
+
+    return "";
+
+  }
+
+
   const parts =
-    dateString.split("-");
+    String(
+      dateString
+    ).split("-");
 
 
   if (
     parts.length !== 3
   ) {
 
-    return dateString;
+    return String(
+      dateString
+    );
 
   }
 
@@ -1997,29 +2659,56 @@ function 格式化日期(
 }
 
 
-/*************************************************
- * 星期
- *************************************************/
+/* =====================================================
+   星期
+   ===================================================== */
+
 
 function 星期文字(
   dateString
 ) {
 
+  if (!dateString) {
+
+    return "";
+
+  }
+
+
   const date =
     new Date(
-      dateString +
+      String(dateString) +
       "T00:00:00"
     );
 
 
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+
+    return "";
+
+  }
+
+
   const weekdays = [
+
     "星期日",
+
     "星期一",
+
     "星期二",
+
     "星期三",
+
     "星期四",
+
     "星期五",
+
     "星期六"
+
   ];
 
 
@@ -2030,44 +2719,48 @@ function 星期文字(
 }
 
 
-/*************************************************
- * 取得目前 Request ID
- *
- * 用於 processing 狀態的輪詢。
- *************************************************/
-
-let currentRequestId = "";
+/* =====================================================
+   HTML 安全處理
+   ===================================================== */
 
 
-/*
- * 覆蓋 submitBooking 中產生 requestId 後，
- * 同時保存 requestId。
- */
-const 原本submitBooking =
-  submitBooking;
+function escapeHTML(
+  value
+) {
 
-
-/*
- * 由於 submitBooking 已經直接執行，
- * 這裡不做額外處理。
- */
-
-
-/*************************************************
- * 修正：
- * 取得目前 Request ID
- *************************************************/
-
-function 取得目前RequestId() {
-
-  return currentRequestId;
+  return String(
+    value == null
+      ? ""
+      : value
+  )
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
-/*************************************************
- * Enter 鍵送出
- *************************************************/
+/* =====================================================
+   Enter 鍵
+   ===================================================== */
+
 
 document
   .getElementById(
@@ -2081,6 +2774,8 @@ document
         event.key === "Enter"
       ) {
 
+        event.preventDefault();
+
         submitBooking();
 
       }
@@ -2089,7 +2784,36 @@ document
   );
 
 
+/* =====================================================
+   點擊 Modal 外部
+   不直接關閉，避免報名時誤觸
+   ===================================================== */
+
+
+document
+  .getElementById(
+    "bookingModal"
+  )
+  .addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        event.target ===
+        this &&
+        !bookingBusy
+      ) {
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
 </script>
+
 
 </body>
 
